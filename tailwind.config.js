@@ -1,63 +1,32 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './page/**/*.{js,ts,jsx,tsx}',
-    './ui/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {
-      // https://vercel.com/design/color
-      colors: {
-        vercel: {
-          pink: '#FF0080',
-          blue: '#0070F3',
-          cyan: '#50E3C2',
-          orange: '#F5A623',
-          violet: '#7928CA',
+    content: [ // which files use tailwind!
+        './app/**/*.{js,ts,jsx,tsx}',
+        './page/**/*.{js,ts,jsx,tsx}',
+        './ui/**/*.{js,ts,jsx,tsx}'
+    ],
+    theme: {
+        extend: { // extends className value
+            // https://vercel.com/design/color
+            colors: {
+                'linear-from': 'rgba(0,0,0,.5)',
+                'linear-to': 'rgba(0,0,0,.35)',
+                'file-to': '#e7e7e7',
+                'file-from': '#fff',
+                'fold-to': '#ccc',
+                'fold-from': '#fefefe',
+                'file-type': '#7f7f7f',
+                'nav': '#f6f6f6',
+                'nav-active': '#dcdcdc',
+                'folder-hv':  '#e6e6e6',
+                'folder-n-hv': '#0063e1'
+            },
+            width: {
+                'pc-w': '27.668px'
+            },
+            height: {
+                'pc-h': '20.0273px'
+            }
         },
-      },
-      keyframes: ({ theme }) => ({
-        rerender: {
-          '0%': {
-            'border-color': theme('colors.vercel.pink'),
-          },
-          '40%': {
-            'border-color': theme('colors.vercel.pink'),
-          },
-        },
-        highlight: {
-          '0%': {
-            background: theme('colors.vercel.pink'),
-            color: theme('colors.white'),
-          },
-          '40%': {
-            background: theme('colors.vercel.pink'),
-            color: theme('colors.white'),
-          },
-        },
-        shimmer: {
-          '100%': {
-            transform: 'translateX(100%)',
-          },
-        },
-        translateXReset: {
-          '100%': {
-            transform: 'translateX(0)',
-          },
-        },
-        fadeToTransparent: {
-          '0%': {
-            opacity: 1,
-          },
-          '40%': {
-            opacity: 1,
-          },
-          '100%': {
-            opacity: 0,
-          },
-        },
-      }),
     },
-  },
 };
