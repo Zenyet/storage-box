@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import React from 'react';
+import Navbar from "@/ui/Navbar";
 
 export default function RootLayout({children}: {
     children: React.ReactNode;
@@ -7,11 +8,16 @@ export default function RootLayout({children}: {
     return (
         <html>
         <head>
-            <title>Next.js with Turbopack</title>
+            <title>disk0.dev</title>
         </head>
-        <body className="overflow-y-scroll bg-zinc-900">
-        <div className="grid grid-cols-[1fr,minmax(auto,240px),min(800px,100%),1fr] gap-x-8 py-8">
-            {children}
+        <body className="overflow-y-scroll bg-white h-screen">
+        <div className='flex'>
+            <div className="w-1/6 border-r-[1px]">
+                <Navbar/>
+            </div>
+            <div className="w-5/6">
+                {children}
+            </div>
         </div>
         </body>
         </html>
