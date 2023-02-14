@@ -1,9 +1,7 @@
-import File from "@/ui/File";
-import List from "@/ui/List";
-interface File {
-    filename: string,
-    extension: string
-}
+import File from '@/ui/File';
+import { getRootDir } from '@/lib/index';
+import { ItemType } from '../types';
+import Folder from '@/ui/Folder';
 
 const files: File[] = [
     {
@@ -39,17 +37,14 @@ const files: File[] = [
     }
 ]
 
-export default function Page() {
-    return (
-        <>
-            <div className="w-[90%] grid grid-cols-8 gap-6 mx-auto my-10 text-gray-700">
-                {
-                    // files.map((file, idx) => {
-                    //     return <File key={idx} extension={file.extension}/>
-                    // })
-                }
-                <List/>
-            </div>
-        </>
-    );
+  return (
+    items?.map((item, idx) => {
+      if (item.folder) {
+        return <Folder key={idx} folderName={item.name}/>;
+      } else if (item.file && item['@microsoft.graph.downloadUrl']) {
+        return <File key={idx} fileName={item.name} extension={computedType(item.name)}
+                     downloadURL={item['@microsoft.graph.downloadUrl']} />;
+      }
+    })
+  );
 }
