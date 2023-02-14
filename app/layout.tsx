@@ -1,4 +1,3 @@
-'use client';
 import '@/styles/globals.css';
 import React, { Suspense } from 'react';
 import Navbar from '@/ui/Navbar';

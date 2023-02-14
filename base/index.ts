@@ -35,7 +35,7 @@ function isExpired(before: number, type: 'access' | 'refresh'): boolean {
     return (now_in_s - before_in_s) >= RT_EXPIRE;
   }
 
-  return true;
+  return false;
 }
 
 function readStore(): Store {
