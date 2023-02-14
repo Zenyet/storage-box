@@ -1,14 +1,14 @@
 'use client'; // use router must be used in client component
 import React from 'react';
 import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
-  // const path = usePathname(); // i think there's no that type thing :))
+  const path = usePathname(); // i think there's no that type thing :))
   return <>
     <nav className='w-[100%] h-screen bg-nav flex flex-col justify-center items-center'>
       <Link href={'/'}
-            className={'flex items-center cursor-default w-5/6 px-2 py-2 rounded-md select-none text-gray-700 '}>
+            className={'flex items-center cursor-default w-5/6 px-2 py-2 rounded-md select-none text-gray-700 ' + (path !== '/about' ? 'bg-nav-active' : '')}>
         <div>
           <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'
                width='18.4453' height='13.3516'>
@@ -22,7 +22,7 @@ export default function Navbar() {
         <span className='text-xs px-2'>/dev/disk0</span>
       </Link>
       <Link href={'/about'}
-            className={'flex items-center cursor-default w-5/6 px-2 py-2 rounded-md select-none text-gray-700 '}>
+            className={'flex items-center cursor-default w-5/6 px-2 py-2 rounded-md select-none text-gray-700 ' + (path === '/about' ? 'bg-nav-active' : '')}>
         <div>
           <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'
                width='18.4453' height='15.9453'>

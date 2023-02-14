@@ -3,18 +3,7 @@ import * as path from 'path';
 import config from '../config';
 import { request } from '../utils';
 import { AuthType } from '../types';
-
-interface Store {
-  client_id?: string,
-  client_secret?: string,
-  redirect_uri?: string,
-  refresh_token?: string,
-  access_token?: string,
-  expire?: string,
-  ac_before?: number,
-  rf_before?: number,
-  grant_type?: 'refresh_token' | 'authorization_code'
-}
+import { Store } from '../types';
 
 
 const AT_EXPIRE: number = 60 * 45;
@@ -38,19 +27,25 @@ function isExpired(before: number, type: 'access' | 'refresh'): boolean {
   return false;
 }
 
-function readStore(): Store {
-  let store: Store = {};
-  try {
-    store = { ...JSON.parse(fs.readFileSync(PATH, 'utf-8')) };
-  } catch (e) {
-    console.log('@Oops: ', e);
-  }
+async function readStore(): Promise<Store> {
+  let resp: string = await request(process.env.SITE_URL + '/api/middle', {
+    headers: {
+      'auth-head': '1676395502unique-head',
+    },
+  });
+  let store: Store = JSON.parse(resp);
+
+  // try {
+  //   store = { ...JSON.parse(fs.readFileSync(PATH, 'utf-8')) };
+  // } catch (e) {
+  //   console.log('@Oops: ', e);
+  // }
   return store;
 }
 
 export async function getAT(): Promise<string> {
   const body = new URLSearchParams();
-  const store: Store = readStore();
+  const store: Store = await readStore();
   const { client_id, client_secret, redirect_uri, access_token, refresh_token, ac_before, rf_before } = store;
   body.append('client_id', client_id as string);
   body.append('redirect_uri', redirect_uri as string);

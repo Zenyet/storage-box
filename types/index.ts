@@ -30,3 +30,15 @@ export interface AuthType {
   access_token: string,
   refresh_token: string
 }
+
+export interface Store {
+  client_id?: string,
+  client_secret?: string,
+  redirect_uri?: string,
+  refresh_token?: string,
+  access_token?: string,
+  expire?: string,
+  ac_before?: number,
+  rf_before?: number,
+  grant_type?: 'refresh_token' | 'authorization_code'
+}
