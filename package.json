@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "preinstall": "npx only-allow pnpm",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -25,6 +26,7 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.7",
+    "critters": "0.0.16",
     "eslint": "8.19.0",
     "eslint-config-next": "latest",
     "postcss": "^8.4.14",

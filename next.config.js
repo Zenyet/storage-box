@@ -4,6 +4,8 @@ const nextConfig = {
   experimental: {
     // Required:
     appDir: true,
+    // server side css
+    optimizeCss: true,
   },
 };
 
