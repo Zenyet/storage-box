@@ -3,39 +3,14 @@ import { getRootDir } from '@/lib/index';
 import { ItemType } from '../types';
 import Folder from '@/ui/Folder';
 
-const files: File[] = [
-    {
-        filename: 'file1',
-        extension: 'jpg'
-    },
-    {
-        filename: 'file2',
-        extension: 'jpeg'
-    },
-    {
-        filename: 'file3',
-        extension: 'png'
-    },
-    {
-        filename: 'file4',
-        extension: 'webp'
-    },{
-        filename: 'file5',
-        extension: 'mp3'
-    },
-    {
-        filename: 'file6',
-        extension: 'mp4'
-    },
-    {
-        filename: 'file7',
-        extension: 'pdf'
-    },
-    {
-        filename: 'file8',
-        extension: 'md'
-    }
-]
+export default async function Page() {
+  const items: ItemType[] = await getRootDir();
+
+  function computedType(name: string): string {
+    // return name.split('.').at(-1) as string; // get final item u can also use pop()!
+    let splits: string[] = name.split('.');
+    return splits.length > 1 ? splits.pop() as string : '?';
+  }
 
   return (
     items?.map((item, idx) => {
