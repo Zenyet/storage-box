@@ -11,7 +11,7 @@
 
 @layer utilities {
     .clip-top-right {
-        clip-path: polygon(0 0, 59px 0, 100% 33px, 100% 100%, 0 100%);
+        clip-path: polygon(0 0, 46px 0, 100% 26px, 100% 100%, 0 100%);
     }
 
     .sd {
