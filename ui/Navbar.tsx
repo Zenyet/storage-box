@@ -1,4 +1,7 @@
-import React from "react";
+'use client'; // use router must be used in client component
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const path = usePathname(); // i think there's no that type thing :))
