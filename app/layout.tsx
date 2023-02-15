@@ -21,11 +21,9 @@ export default function RootLayout({ children }: {
         <Navbar />
       </div>
       <div className='relative w-5/6'>
-        <div className='w-[90%] grid grid-cols-8 gap-6 mx-auto my-10 text-gray-700'>
-          <Suspense fallback={<Loading />}>
-            {children}
-          </Suspense>
-        </div>
+        <Suspense fallback={<Loading />}>
+          {children}
+        </Suspense>
       </div>
     </div>
     </body>

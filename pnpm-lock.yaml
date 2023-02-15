@@ -4,6 +4,7 @@ specifiers:
   '@types/node': 18.0.3
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
+  '@vercel/edge-config': 0.1.1
   autoprefixer: ^10.4.7
   clsx: 1.2.1
   critters: 0.0.16
@@ -15,11 +16,13 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.1.12
   react: 18.2.0
   react-dom: 18.2.0
+  swr: 2.0.3
   tailwindcss: ^3.2.6
   typescript: 4.7.4
   use-count-up: 3.0.1
 
 dependencies:
+  '@vercel/edge-config': registry.npmmirror.com/@vercel/edge-config/0.1.1
   clsx: registry.npmmirror.com/clsx/1.2.1
   next: registry.npmmirror.com/next/13.1.6_biqbaboplfbrettd7655fr4n2y
   react: registry.npmmirror.com/react/18.2.0
@@ -37,6 +40,7 @@ devDependencies:
   postcss: registry.npmmirror.com/postcss/8.4.21
   prettier: registry.npmmirror.com/prettier/2.8.4
   prettier-plugin-tailwindcss: registry.npmmirror.com/prettier-plugin-tailwindcss/0.1.13_prettier@2.8.4
+  swr: registry.npmmirror.com/swr/2.0.3_react@18.2.0
   tailwindcss: registry.npmmirror.com/tailwindcss/3.2.6_postcss@8.4.21
   typescript: registry.npmmirror.com/typescript/4.7.4
 
@@ -420,6 +424,13 @@ packages:
       '@typescript-eslint/types': registry.npmmirror.com/@typescript-eslint/types/5.51.0
       eslint-visitor-keys: registry.npmmirror.com/eslint-visitor-keys/3.3.0
     dev: true
+
+  registry.npmmirror.com/@vercel/edge-config/0.1.1:
+    resolution: {integrity: sha512-HDl+12tzW2RHIu8Y804kXg2VpZ02KVb7Nqsa+e1AFoACXXMb+7TfjI1wR19tXoDIu5enQz1dbat40YMEgaH13Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vercel/edge-config/-/edge-config-0.1.1.tgz}
+    name: '@vercel/edge-config'
+    version: 0.1.1
+    engines: {node: '>=14.6'}
+    dev: false
 
   registry.npmmirror.com/acorn-jsx/5.3.2_acorn@8.8.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz}
@@ -2659,7 +2670,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
-    dev: false
 
   registry.npmmirror.com/read-cache/1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/read-cache/-/read-cache-1.0.0.tgz}
@@ -2939,6 +2949,19 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  registry.npmmirror.com/swr/2.0.3_react@18.2.0:
+    resolution: {integrity: sha512-sGvQDok/AHEWTPfhUWXEHBVEXmgGnuahyhmRQbjl9XBYxT/MSlAzvXEKQpyM++bMPaI52vcWS2HiKNaW7+9OFw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/swr/-/swr-2.0.3.tgz}
+    id: registry.npmmirror.com/swr/2.0.3
+    name: swr
+    version: 2.0.3
+    engines: {pnpm: '7'}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: registry.npmmirror.com/react/18.2.0
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.0_react@18.2.0
+    dev: true
+
   registry.npmmirror.com/synckit/0.8.5:
     resolution: {integrity: sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/synckit/-/synckit-0.8.5.tgz}
     name: synckit
@@ -3141,6 +3164,17 @@ packages:
     dependencies:
       react: registry.npmmirror.com/react/18.2.0
     dev: false
+
+  registry.npmmirror.com/use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz}
+    id: registry.npmmirror.com/use-sync-external-store/1.2.0
+    name: use-sync-external-store
+    version: 1.2.0
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: registry.npmmirror.com/react/18.2.0
+    dev: true
 
   registry.npmmirror.com/util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/util-deprecate/-/util-deprecate-1.0.2.tgz}

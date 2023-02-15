@@ -1,9 +1,8 @@
 import React from 'react';
 
 export default function Loading() {
-  return <div className='absolute left-0 top-0  flex items-center justify-center w-[100%] h-[100%]'>
+  return <div className='flex items-center justify-center w-[100%] h-[100%]'>
       <svg className='animate-spin' width='23px' height='23px' viewBox='0 0 23 23' version='1.1'>
-        <title>Cursors/Beachball</title>
         <defs>
           <filter x='-31.0%' y='-31.0%' width='161.9%' height='161.9%' filterUnits='objectBoundingBox' id='filter-1'>
             <feOffset dx='0' dy='1' in='SourceAlpha' result='shadowOffsetOuter1'></feOffset>
