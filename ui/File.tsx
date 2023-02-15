@@ -14,7 +14,7 @@ interface FileProps {
 export default function File({ fileName, extension, downloadURL }: FileProps) {
   // const [, MENU_ID] = useMenu();
 
-  function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+  function handleDBClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     e.preventDefault();
     useDownload(downloadURL);
   }
@@ -27,7 +27,8 @@ export default function File({ fileName, extension, downloadURL }: FileProps) {
                 h: 239/2
             */}
       {/*<Menu />*/}
-      <Link href={''} onClick={event => handleClick(event)}
+      <Link href={''} onClick={e => e.preventDefault()}
+            onDoubleClick={e => handleDBClick(e)}
             className='flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
         <header
           className='flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'>
