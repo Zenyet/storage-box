@@ -4,6 +4,7 @@ import config from '../config';
 import { request } from '../utils';
 import { AuthType } from '../types';
 import { Store } from '../types';
+// import { get } from '@vercel/edge-config';
 
 
 const AT_EXPIRE: number = 60 * 45;
@@ -15,13 +16,12 @@ const PATH: string = path.join(process.cwd(), '/base/store.json');
 function isExpired(before: number, type: 'access' | 'refresh'): boolean {
   let now: number = +(new Date());
   let now_in_s: number = now / 1000;
-  let before_in_s: number = before / 1000;
 
   if (type === 'access') {
-    return (now_in_s - before_in_s) >= AT_EXPIRE;
+    return (now_in_s - before) >= AT_EXPIRE;
   }
   if (type === 'refresh') {
-    return (now_in_s - before_in_s) >= RT_EXPIRE;
+    return (now_in_s - before) >= RT_EXPIRE;
   }
 
   return false;
@@ -46,6 +46,7 @@ export async function getAT(): Promise<string> {
   body.append('client_secret', client_secret as string);
   body.append('refresh_token', refresh_token as string);
   body.append('grant_type', 'refresh_token');
+  console.log(isExpired(rf_before as number, 'refresh'));
   if (!access_token || !refresh_token || isExpired(rf_before as number, 'refresh')) {
     const newAT: AuthType = await request(config.OAuthURL + '/token', {
       method: 'POST',
