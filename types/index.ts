@@ -38,7 +38,7 @@ export interface Store {
   refresh_token?: string,
   access_token?: string,
   expire?: string,
-  ac_before?: number,
-  rf_before?: number,
+  ac_before?: string,
+  rf_before?: string,
   grant_type?: 'refresh_token' | 'authorization_code'
 }
