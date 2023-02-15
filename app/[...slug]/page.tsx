@@ -3,8 +3,8 @@ import About from '@/ui/About';
 import NotFound from '@/ui/not-found';
 import { getSpecifiedDir } from '@/lib/index';
 import { ItemType } from '../../types';
-import Folder from '@/ui/Folder';
-import File from '@/ui/File';
+import List from '@/ui/List';
+import Background from '@/ui/Background';
 // import { notFound } from 'next/navigation';
 
 
@@ -40,16 +40,22 @@ export default async function Page({ params }: Props) { // use catch all routes 
   //   // ok it got it, too. because of development mode, it do not deal the errors :!!
   // }
 
+
   const items: ItemType[] = await getSpecifiedDir(cookedURL);
 
-  if (!items[0]) {
+  try {
+    void (!items);
+  } catch (e) {
+    console.log(e);
     return <NotFound />;
   }
 
-  function computedType(name: string): string {
-    // return name.split('.').at(-1) as string; // get final item also can use pop()!
-    let splits: string[] = name.split('.');
-    return splits.length > 1 ? splits.pop() as string : '?';
+  if (!items.length) {
+    return (
+      <Background>
+        <h2 className='font-bold text-4xl'>空空如也...</h2>
+      </Background>
+    );
   }
 
   return <List items={items} href_={href_} />;
