@@ -46,7 +46,6 @@ export async function getAT(): Promise<string> {
   body.append('client_secret', client_secret as string);
   body.append('refresh_token', refresh_token as string);
   body.append('grant_type', 'refresh_token');
-  console.log(isExpired(rf_before as number, 'refresh'));
   if (!access_token || !refresh_token || isExpired(rf_before as number, 'refresh')) {
     const newAT: AuthType = await request(config.OAuthURL + '/token', {
       method: 'POST',

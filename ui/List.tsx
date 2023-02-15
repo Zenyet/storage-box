@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import Folder from '@/ui/Folder';
 import File from '@/ui/File';
