@@ -52,17 +52,7 @@ export default async function Page({ params }: Props) { // use catch all routes 
     return splits.length > 1 ? splits.pop() as string : '?';
   }
 
-  return (
-    items ?
-      (items?.map((item, idx) => {
-        if (item.folder) {
-          return <Folder key={idx} folderName={item.name} href_={href_} />;
-        } else if (item.file && item['@microsoft.graph.downloadUrl']) {
-          return <File key={idx} fileName={item.name} extension={computedType(item.name)}
-                       downloadURL={item['@microsoft.graph.downloadUrl']} />;
-        }
-      })) : <div>test</div>
-  );
+  return <List items={items} href_={href_} />;
 }
 
 
