@@ -27,25 +27,19 @@ function isExpired(before: number, type: 'access' | 'refresh'): boolean {
   return false;
 }
 
-async function readStore(): Promise<Store> {
-  let resp: string = await request(process.env.SITE_URL + '/api/middle', {
-    headers: {
-      'auth-head': '1676395502unique-head',
-    },
-  });
-  let store: Store = JSON.parse(resp);
-
-  // try {
-  //   store = { ...JSON.parse(fs.readFileSync(PATH, 'utf-8')) };
-  // } catch (e) {
-  //   console.log('@Oops: ', e);
-  // }
+function readStore(): Store {
+  let store: Store = {};
+  try {
+    store = { ...JSON.parse(fs.readFileSync(PATH, 'utf-8')) };
+  } catch (e) {
+    console.log('@Oops: ', e);
+  }
   return store;
 }
 
 export async function getAT(): Promise<string> {
   const body = new URLSearchParams();
-  const store: Store = await readStore();
+  const store: Store = readStore();
   const { client_id, client_secret, redirect_uri, access_token, refresh_token, ac_before, rf_before } = store;
   body.append('client_id', client_id as string);
   body.append('redirect_uri', redirect_uri as string);
