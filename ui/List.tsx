@@ -3,7 +3,7 @@ import React from 'react';
 import Folder from '@/ui/Folder';
 import File from '@/ui/File';
 import { ItemType } from '../types';
-import config from '../config';
+// import config from '../config';
 import usePreview from '../hooks/usePreview';
 import PreviewContext from '../context';
 import Previewer from '@/ui/Previewer';
@@ -25,7 +25,7 @@ export default function List({ items, href_ }: { items: ItemType[], href_?: stri
         {
           items?.map((item, idx) => {
             if (item.folder) {
-              return <Folder locked={item.name === config.lockedFolder} key={idx} href_={href_}
+              return <Folder key={idx} href_={href_}
                              folderName={item.name} />;
             } else if (item.file && item['@microsoft.graph.downloadUrl']) {
               return <File key={idx} fileName={item.name} extension={computedType(item.name)}
