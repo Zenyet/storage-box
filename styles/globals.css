@@ -22,4 +22,18 @@
     .file-drop {
         filter: drop-shadow(0 3px 4px #bdbdbd);
     }
+
+    .preview-trans {
+        transition: all .5s ease;
+    }
+
+    .preview-show {
+        opacity: 1;
+        z-index: 999;
+        height: 90%;
+        width: 85%;
+        transform: translate3d(-50%, -50%, 0);
+        left: 50% !important;
+        top: 50% !important;
+    }
 }

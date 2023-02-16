@@ -19,7 +19,8 @@ module.exports = {
                 'nav': '#f6f6f6',
                 'nav-active': '#dcdcdc',
                 'folder-hv':  '#e6e6e6',
-                'folder-n-hv': '#0063e1'
+                'folder-n-hv': '#0063e1',
+                'preview-bg': '#f6f6f6',
             },
             width: {
                 'pc-w': '27.668px'

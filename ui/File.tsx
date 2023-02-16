@@ -1,8 +1,10 @@
 'use client';
-import React from 'react';
+import React, { KeyboardEvent, useContext } from 'react';
 import Link from 'next/link';
 // import useMenu from '../hooks/useMenu';
 import useDownload from '../hooks/useDownload';
+import PreviewContext from '../context';
+
 // import Menu from '@/ui/Menu';
 
 interface FileProps {
@@ -13,10 +15,23 @@ interface FileProps {
 
 export default function File({ fileName, extension, downloadURL }: FileProps) {
   // const [, MENU_ID] = useMenu();
+  const preview = useContext(PreviewContext)!;
+
+  function handleClick(e: React.MouseEvent<HTMLElement>) {
+    e.preventDefault();
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    preview({ show: false, left: left + 'px', top: top + 'px' });
+  }
 
   function handleDBClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     e.preventDefault();
     useDownload(downloadURL);
+  }
+
+  function handleSpace(e: KeyboardEvent) {
+    if (e.code === 'Space') {
+      preview({ show: true, filename: fileName, url: downloadURL, extension });
+    }
   }
 
   return (
@@ -27,13 +42,16 @@ export default function File({ fileName, extension, downloadURL }: FileProps) {
                 h: 239/2
             */}
       {/*<Menu />*/}
-      <Link href={''} onClick={e => e.preventDefault()}
+      <Link href={''}
+            onClick={e => e.preventDefault()}
             onDoubleClick={e => handleDBClick(e)}
+            onKeyDown={e => handleSpace(e)}
             className='flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
         <header
-          className='flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'>
+          onClickCapture={e => handleClick(e)}
+          className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'>
           <div
-               className='flex-row relative bg-gradient-to-tr from-file-from to-file-to bg-white w-[72px] h-[96px] rounded-md text-black clip-top-right'>
+            className='flex-row relative bg-gradient-to-tr from-file-from to-file-to bg-white w-[72px] h-[96px] rounded-md text-black clip-top-right'>
             <div
               className='h-[24px] w-[24px] bg-gradient-to-tr from-linear-from to-linear-to blur absolute right-[2px] top-[2px] z-0'>
             </div>

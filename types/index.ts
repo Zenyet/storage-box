@@ -42,3 +42,12 @@ export interface Store {
   rf_before?: number,
   grant_type?: 'refresh_token' | 'authorization_code'
 }
+
+export interface PreviewConfig {
+  show: boolean,
+  left?: string,
+  top?: string,
+  url?: string,
+  filename?: string,
+  extension?: string
+}
