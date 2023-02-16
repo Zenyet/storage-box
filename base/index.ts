@@ -4,7 +4,7 @@ import config from '../config';
 import { request } from '../utils';
 import { AuthType } from '../types';
 import { Store } from '../types';
-import Redis from 'ioredis';
+// import Redis from 'ioredis';
 // import { get } from '@vercel/edge-config';
 
 
@@ -13,7 +13,7 @@ const RT_EXPIRE: number = 60 * 60 * 24 * 85; // 过期 5 天前刷新 refresh_to
 
 // const PATH: string = path.join(process.cwd(), '/base/store.json');
 
-const client = new Redis(config.redisURL);
+// const client = new Redis(config.redisURL);
 
 // https://api.cloudflare.com/client/v4/accounts/account_identifier/storage/kv/namespaces/namespace_identifier/values/key_name
 function cookedURL(): string {
@@ -37,7 +37,7 @@ function isExpired(before: number, type: 'access' | 'refresh'): boolean {
 }
 
 async function readStore(): Promise<Store> {
-  let store: Store  = await request(cookedURL(), {
+  let store: Store = await request(cookedURL(), {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -67,6 +67,7 @@ async function readStore(): Promise<Store> {
 
 export async function getAT(): Promise<string> {
   const body = new URLSearchParams();
+  const formData: FormData = new URLSearchParams();
   const store: Store = await readStore();
   const { client_id, client_secret, redirect_uri, access_token, refresh_token, ac_before, rf_before } = store;
   body.append('client_id', client_id as string);
@@ -95,7 +96,6 @@ export async function getAT(): Promise<string> {
     // client.set('ac_before', before);
     // client.set('rf_before', before);
     const stringify: string = JSON.stringify(store);
-    const formData: FormData = new FormData();
     formData.append('metadata', '{}');
     formData.append('value', stringify);
     await request(cookedURL(), {
@@ -117,12 +117,26 @@ export async function getAT(): Promise<string> {
         },
         body,
       });
-      const before: string = (new Date().getTime()) / 1000 + '';
-      // store.access_token = newAT.access_token;
-      // store.ac_before = (new Date().getTime()) / 1000 + '';
+      // const before: number = (new Date().getTime()) / 1000;
       // fs.writeFileSync(PATH, JSON.stringify(store));
-      client.set('access_token', newAT.access_token);
-      client.set('ac_before', before);
+
+      store.access_token = newAT.access_token;
+      store.ac_before = (new Date().getTime()) / 1000;
+      const stringify: string = JSON.stringify(store);
+      formData.append('metadata', '{}');
+      formData.append('value', stringify);
+      await request(cookedURL(), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-Auth-Email': config.x_auth_email,
+          'Authorization': config.x_bearer,
+        },
+        body: formData,
+      });
+
+      // client.set('access_token', newAT.access_token);
+      // client.set('ac_before', before);
       return newAT.access_token;
     }
   }
