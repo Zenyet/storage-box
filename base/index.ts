@@ -62,7 +62,6 @@ async function readStore(): Promise<Store> {
   // } catch (e) {
   //   console.log('@Oops: ', e);
   // }
-  console.log(store);
   return store;
 }
 
