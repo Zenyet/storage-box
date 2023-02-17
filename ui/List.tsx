@@ -21,7 +21,7 @@ export default function List({ items, href_ }: { items: ItemType[], href_?: stri
     <PreviewContext.Provider value={preview}>
       <Previewer show={pConfig.show} left={pConfig.left} top={pConfig.top} filename={pConfig.filename}
                  url={pConfig.url} extension={pConfig.extension} />
-      <div className='relative z-10 w-[90%] grid grid-cols-8 gap-6 mx-auto my-10 text-gray-700'>
+      <div className='relative z-10 w-[90%] grid grid-cols-7 gap-6 mx-auto my-10 text-gray-700'>
         {
           items?.map((item, idx) => {
             if (item.folder) {
