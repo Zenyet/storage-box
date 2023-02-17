@@ -29,7 +29,7 @@ export async function getSpecifiedDir(folder_name: string): Promise<ItemType[]> 
 
 export async function getThumbnail(fileId: string) {
   const access_token: string = await getAT();
-  let res: ThumbType = await request<ThumbType>(`${config.thumbURL}/${fileId}/thumbnails/0/small`, {
+  let res: ThumbType = await request<ThumbType>(`${config.thumbURL}/${fileId}/thumbnails/0/medium`, {
     headers: {
       'Authorization': `Bearer ${access_token}`,
     },
