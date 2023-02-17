@@ -67,7 +67,7 @@ export default async function Page({ params }: Props) { // use catch all routes 
     if (map.has(index)) {
       return {
         ...item,
-        thumbnail: thumbnails[map.get(index)!].url,
+        thumbnail: thumbnails[map.get(index)!],
       };
     }
     return item;

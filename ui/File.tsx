@@ -4,6 +4,7 @@ import Link from 'next/link';
 // import useMenu from '../hooks/useMenu';
 import useDownload from '../hooks/useDownload';
 import PreviewContext from '../context';
+import { ThumbType } from '../types';
 
 // import Menu from '@/ui/Menu';
 
@@ -13,7 +14,7 @@ interface FileProps {
   downloadURL: string,
   href_?: string,
   itemId?: string,
-  thumbnail?: string
+  thumbnail?: ThumbType
 }
 
 export default function File({ fileName, extension, downloadURL, href_, thumbnail }: FileProps) {
@@ -38,6 +39,17 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
     }
   }
 
+  function computeStyle(): { height: string } | undefined {
+    // console.log(thumbnail?.height);
+    if (thumbnail && thumbnail.width > 140 && thumbnail.height < thumbnail.width) {
+      const radio = thumbnail.height / thumbnail.width;
+      return {
+        height: 115 * radio + 'px',
+      };
+    }
+    return undefined;
+  }
+
   return (
     <>
       {/*
@@ -58,8 +70,16 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
           {
             thumbnail ?
               <>
-                <div className='overflow-hidden bg-white shadow-sm max-w-[85%] max-h-[85%] p-1'>
-                  <img src={thumbnail} alt='thumbnail' />
+                <div className='overflow-hidden bg-white shadow-sm w-[85%] h-[85%] p-1'
+                     style={{ ...computeStyle() ?? {} }}
+                >
+                  <div className='w-[100%] h-[100%]' style={{
+                    backgroundImage: `url(${thumbnail.url})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                  }}></div>
+                  {/*<img src={thumbnail} alt='thumbnail' />*/}
                 </div>
               </> : <>
                 <div
@@ -81,5 +101,6 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
           className='max-w-[100%] line-limit overflow-hidden text-ellipsis text-gray-700 text-[13px] mt-0.5 px-1 rounded-[4px] group-focus:bg-folder-n-hv group-focus:text-white'>{fileName}</p>
       </Link>
     </>
-  );
+  )
+    ;
 }

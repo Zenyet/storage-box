@@ -15,7 +15,7 @@ export interface ItemType {
       quickXorHash: string
     }
   },
-  thumbnail?: string
+  thumbnail?: ThumbType
 }
 
 export interface RespType {
@@ -24,8 +24,8 @@ export interface RespType {
 }
 
 export interface ThumbType {
-  height?: string,
-  width?: string,
+  height: number,
+  width: number,
   url: string
 }
 
