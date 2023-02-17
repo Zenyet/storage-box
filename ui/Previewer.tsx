@@ -12,7 +12,7 @@ export default function Previewer({ show, left, top, filename, url, extension }:
     setDestroy(false);
 
     function listener(e: KeyboardEvent) {
-      e.preventDefault();
+      // e.preventDefault(); 除了ESC或者其他绑定时间 code能执行，其他都不行了..
       if (e.code === 'Escape') {
         preview({ show: false });
       }
