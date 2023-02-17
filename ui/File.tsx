@@ -39,12 +39,18 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
     }
   }
 
-  function computeStyle(): { height: string } | undefined {
+  function computeStyle(): { height?: string, width?: string } | undefined {
     // console.log(thumbnail?.height);
     if (thumbnail && thumbnail.width > 140 && thumbnail.height < thumbnail.width) {
       const radio = thumbnail.height / thumbnail.width;
       return {
         height: 115 * radio + 'px',
+      };
+    }
+    if (thumbnail && thumbnail.height > 140 && thumbnail.width < thumbnail.height) {
+      const radio = thumbnail.width / thumbnail.height;
+      return {
+        width: 115 * radio + 'px',
       };
     }
     return undefined;
