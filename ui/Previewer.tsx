@@ -9,16 +9,33 @@ export default function Previewer({ show, left, top, filename, url, extension }:
   const preview = useContext(PreviewContext)!;
 
   useEffect(() => {
-    if (show) {
-      setDestroy(false);
+    setDestroy(false);
+
+    function listener(e: KeyboardEvent) {
+      e.preventDefault();
+      if (e.code === 'Escape') {
+        preview({ show: false });
+      }
     }
-  }, [show, destroy]);
+
+    window.addEventListener('keydown', listener);
+    return () => {
+      window.removeEventListener('keydown', listener);
+    };
+  }, [destroy]);
 
   function handleClick() {
     console.log(left, top);
     preview({ show: false });
     setDestroy(true);
   }
+
+  // function handlePress(e: React.KeyboardEvent) {
+  //   e.preventDefault();
+  //   if (e.code === 'Escape') {
+  //     preview({ show: false });
+  //   }
+  // }
 
   return (
     <div
@@ -46,7 +63,7 @@ export default function Previewer({ show, left, top, filename, url, extension }:
         {matches(extension as string, 'image') && !destroy &&
           <img className='rounded-[4px] max-w-full' src={url} alt='preview' />}
         {matches(extension as string, 'video') && !destroy &&
-          <video controls className='rounded-[4px] max-w-full' src={url}></video>}
+          <video controls className='rounded-[4px] w-[100%] max-w-full' src={url}></video>}
       </footer>
     </div>
   );
