@@ -21,6 +21,7 @@
 
     .file-drop {
         filter: drop-shadow(0 3px 4px #bdbdbd);
+        -webkit-filter: drop-shadow(0 3px 4px #bdbdbd);
     }
 
     .preview-trans {
