@@ -14,12 +14,19 @@ export interface ItemType {
     hashes: {
       quickXorHash: string
     }
-  }
+  },
+  thumbnail?: string
 }
 
 export interface RespType {
   '@odata.context': string,
   'value': ItemType[]
+}
+
+export interface ThumbType {
+  height?: string,
+  width?: string,
+  url: string
 }
 
 export interface AuthType {

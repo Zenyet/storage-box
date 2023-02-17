@@ -1,8 +1,8 @@
 import React from 'react';
 import About from '@/ui/About';
 import NotFound from '@/ui/not-found';
-import { getSpecifiedDir } from '@/lib/index';
-import { ItemType } from '../../types';
+import { getSpecifiedDir, getThumbnail } from '@/lib/index';
+import { ItemType, ThumbType } from '../../types';
 import List from '@/ui/List';
 import Background from '@/ui/Background';
 // import { notFound } from 'next/navigation';
@@ -22,6 +22,12 @@ export default async function Page({ params }: Props) { // use catch all routes 
   const href_: string = params.slug.join('/');
   const len: number = params.slug.length;
   let cookedURL: string = '/';
+
+  function computedType(name: string): boolean {
+    // return name.split('.').at(-1) as string; // get final item also can use pop()!
+    return name.includes('image') || name.includes('video');
+  }
+
   params.slug.forEach((v, idx) => {
     if (idx !== len || len === 0) {
       if (idx !== len - 1) {
@@ -41,7 +47,31 @@ export default async function Page({ params }: Props) { // use catch all routes 
   // }
 
 
-  const items: ItemType[] = await getSpecifiedDir(cookedURL);
+  let items: ItemType[] = await getSpecifiedDir(cookedURL);
+  const promises: Promise<ThumbType>[] = []; // 使用 Promise 并发好点感觉
+  const map: Map<number, number> = new Map<number, number>();
+  let flag: number = 0;
+
+  items.forEach((item, index) => {
+    if (computedType(item.file?.mimeType!)) {
+      promises.push(getThumbnail(item.id));
+      map.set(index, flag);
+      ++flag;
+    }
+  });
+
+  const thumbnails: ThumbType[] = await Promise.all<ThumbType>(promises);
+  // console.log(thumbnails);
+  //@ts-ignore
+  items = items.map((item, index) => {
+    if (map.has(index)) {
+      return {
+        ...item,
+        thumbnail: thumbnails[map.get(index)!].url,
+      };
+    }
+    return item;
+  });
 
   try {
     void (!items);

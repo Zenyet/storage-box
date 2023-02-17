@@ -9,14 +9,14 @@ export async function request<T>(url: string, extended: RequestInit): Promise<T>
   });
 }
 
-export function matches(extension: string, type: 'image' | 'video' | 'markdown' | 'audio'): boolean {
-  const imgExtensions: Array<string> = ['jpg', 'jpeg', 'webp', 'png', 'bmp', 'gif', 'svg', 'avif', 'exif'];
-  const videoExtensions: Array<string> = ['mp4', 'mkv', 'mpeg', 'flv'];
+export function matches(extension: string, type?: 'image' | 'video' | 'markdown' | 'audio'): boolean {
+  const imgExtensions: Array<string> = ['image', 'jpg', 'jpeg', 'webp', 'png', 'bmp', 'gif', 'svg', 'avif', 'exif'];
+  const videoExtensions: Array<string> = ['video', 'mp4', 'mkv', 'mpeg', 'flv'];
   if (type === 'image') {
     return imgExtensions.includes(extension);
   }
-  if(type === 'video') {
+  if (type === 'video') {
     return videoExtensions.includes(extension);
   }
-  return false
+  return imgExtensions.includes(extension) || videoExtensions.includes(extension);
 }
