@@ -40,4 +40,10 @@
     .preview-shadow {
         box-shadow: 0 25px 50px -10px rgba(0, 0, 0, .3);
     }
+
+    .line-limit {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
 }
