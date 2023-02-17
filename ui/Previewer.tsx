@@ -25,7 +25,6 @@ export default function Previewer({ show, left, top, filename, url, extension }:
   }, [destroy]);
 
   function handleClick() {
-    console.log(left, top);
     preview({ show: false });
     setDestroy(true);
   }
