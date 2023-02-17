@@ -36,4 +36,8 @@
         left: 50% !important;
         top: 50% !important;
     }
+
+    .preview-shadow {
+        box-shadow: 0 25px 50px -10px rgba(0, 0, 0, .3);
+    }
 }

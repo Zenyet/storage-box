@@ -22,7 +22,7 @@ export default function Previewer({ show, left, top, filename, url, extension }:
 
   return (
     <div
-      className={'shadow-2xl flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden absolute z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
+      className={'preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden absolute z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
       style={{ top, left }}
     >
       <header className='h-[5%] flex items-center'>
