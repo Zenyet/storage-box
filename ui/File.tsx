@@ -58,7 +58,7 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
           {
             thumbnail ?
               <>
-                <div className='bg-white shadow-sm max-w-[85%] max-h-[85%] p-1'>
+                <div className='overflow-hidden bg-white shadow-sm max-w-[85%] max-h-[85%] p-1'>
                   <img src={thumbnail} alt='thumbnail' />
                 </div>
               </> : <>
