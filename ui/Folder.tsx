@@ -26,7 +26,7 @@ export default function Folder({ locked, folderName, href_ }: {
   return (
     <Link href={href} onClick={e => e.preventDefault()}
           onDoubleClick={e => handleDBClick(e)}
-          className='relative group flex flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
+          className='relative group focus:outline-none flex flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
       {isSafari ? <>
         <input
           type='text' className='cursor-default group z-10 absolute w-[100%] h-[100%] opacity-0 safari-focus'

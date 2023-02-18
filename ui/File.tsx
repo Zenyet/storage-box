@@ -70,7 +70,7 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
             onClick={e => e.preventDefault()}
             onDoubleClick={e => handleDBClick(e)}
             onKeyDown={e => handleSpace(e)}
-            className='relative flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
+            className='relative focus:outline-none flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
         {isSafari ? <>
           <input
             onClickCapture={e => handleClick(e)}
