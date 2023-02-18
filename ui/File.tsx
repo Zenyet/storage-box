@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useDownload from '../hooks/useDownload';
 import PreviewContext from '../context';
 import { ThumbType } from '../types';
+import useUserAgent from '../hooks/useUserAgent';
 
 // import Menu from '@/ui/Menu';
 
@@ -19,6 +20,7 @@ interface FileProps {
 
 export default function File({ fileName, extension, downloadURL, href_, thumbnail }: FileProps) {
   // const [, MENU_ID] = useMenu();
+  const isSafari: boolean = useUserAgent();
   const preview = useContext(PreviewContext)!;
   const href: string = `${href_ ? href_ : ''}/${fileName}`;
 
@@ -68,7 +70,13 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
             onClick={e => e.preventDefault()}
             onDoubleClick={e => handleDBClick(e)}
             onKeyDown={e => handleSpace(e)}
-            className='flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
+            className='relative flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
+        {isSafari ? <>
+          <input
+            onClickCapture={e => handleClick(e)}
+            type='text' className='cursor-default group z-10 absolute w-[100%] h-[100%] opacity-0 safari-focus'
+          />
+        </> : ''}
         <header
           onClickCapture={e => handleClick(e)}
           className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'

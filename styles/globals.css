@@ -49,4 +49,13 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
+
+    .safari-focus:focus + header {
+        background-color: #e6e6e6 !important;
+    }
+
+    .safari-focus:focus ~ p {
+        background-color: #0063e1 !important;
+        color: #fff;
+    }
 }
