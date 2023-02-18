@@ -25,7 +25,9 @@
     }
 
     .preview-trans {
+        transform: translateZ(0);
         transition: all .5s ease;
+        /*transition: height .5s ease, width .5s ease, top .5s ease, left .5s ease, opacity;*/
     }
 
     .preview-show {
@@ -33,9 +35,9 @@
         z-index: 999;
         height: 90%;
         width: 85%;
-        transform: translate3d(-50%, -50%, 0);
-        left: 50% !important;
-        top: 50% !important;
+        transform: translateZ(0);
+        left: 7.5% !important;
+        top: 5% !important;
     }
 
     .preview-shadow {
