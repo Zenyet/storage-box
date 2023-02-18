@@ -1,15 +1,15 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PreviewContext from '../context';
 import { PreviewConfig } from '../types';
 import { matches } from '../utils';
 
 export default function Previewer({ show, left, top, filename, url, extension }: PreviewConfig) {
-  const [destroy, setDestroy] = useState<boolean>(false);
+  // const [destroy, setDestroy] = useState<boolean>(false);
   const preview = useContext(PreviewContext)!;
 
   useEffect(() => {
-    setDestroy(false);
+    // setDestroy(false);
 
     function listener(e: KeyboardEvent) {
       // e.preventDefault(); 除了ESC或者其他绑定时间 code能执行，其他都不行了..
@@ -22,11 +22,10 @@ export default function Previewer({ show, left, top, filename, url, extension }:
     return () => {
       window.removeEventListener('keydown', listener);
     };
-  }, [destroy]);
+  }, [show]);
 
   function handleClick() {
     preview({ show: false });
-    setDestroy(true);
   }
 
   // function handlePress(e: React.KeyboardEvent) {
@@ -59,9 +58,9 @@ export default function Previewer({ show, left, top, filename, url, extension }:
         </span>
       </header>
       <footer className='flex items-center justify-center overflow-hidden h-[95%] rounded-[4px] m-1.5'>
-        {matches(extension as string, 'image') && !destroy &&
+        {matches(extension as string, 'image') &&
           <img className='rounded-[4px] max-w-full' src={url} alt='preview' />}
-        {matches(extension as string, 'video') && !destroy &&
+        {matches(extension as string, 'video') &&
           <video controls className='rounded-[4px] w-[100%] max-w-full' src={url}></video>}
       </footer>
     </div>
