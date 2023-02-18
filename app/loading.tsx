@@ -2,9 +2,13 @@ import React from 'react';
 
 export default function Loading() {
   return <div className='flex items-center justify-center w-[100%] h-[100%]'>
-    <svg xmlns='http://www.w3.org/2000/svg' version='1.0' width='24' height='24' viewBox='0 0 128 128'
-         xmlSpace='preserve'><rect width='100%' height='100%' fill='#FFF'/>
-      <g><path d='M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z' fill='#ffcb02'/>
+    <svg className='animate-spin' xmlns='http://www.w3.org/2000/svg' version='1.0' width='24' height='24' viewBox='0 0 128 128'
+         xmlSpace='preserve'>
+      <rect width='100%' height='100%' fill='#FFF' />
+      <g>
+        <path
+          d='M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z'
+          fill='#ffcb02' />
         <path
           d='M65.32 29.05c7.65 19.98-1.44 35.18-1.44 35.18S52.2 46.05 30.03 44.85A38.6 38.6 0 0 0 .56 57.93 63.8 63.8 0 0 1 37.56 6c8.2 1.8 22.26 7.16 27.76 23.05z'
           fill='#ff9e02' />
@@ -20,7 +24,7 @@ export default function Loading() {
         <path
           d='M26.64 115.63C24 107.6 21.6 93.06 32.5 80.5c13.48-16.62 31.58-16.55 31.58-16.55s-9.6 19.06.44 38.86a38.82 38.82 0 0 0 26.05 19.17 63.78 63.78 0 0 1-63.93-6.3z'
           fill='#4fca24' />
-        <animateTransform attributeName='transform' type='rotate' from='0 64 64' to='360 64 64' dur='1500ms'
-                          repeatCount='indefinite' /></g></svg>
+      </g>
+    </svg>
   </div>;
 }
