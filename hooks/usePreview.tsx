@@ -9,6 +9,8 @@ export default function usePreview(): [PreviewConfig, (pConfig: PreviewConfig) =
   const [url, setUrl] = useState<string>('');
   const [filename, setFilename] = useState<string>('');
   const [extension, setExtension] = useState<string>('');
+  const [width, setWidth] = useState<string>('128px');
+  const [height, setHeight] = useState<string>('128px');
 
   // const [pConfig, setPConfig] = useState<PreviewConfig>({
   //   show: false,
@@ -16,10 +18,12 @@ export default function usePreview(): [PreviewConfig, (pConfig: PreviewConfig) =
   //   top: '0',
   // });
 
-  function preview({ show, left, top, url, filename, extension }: PreviewConfig) {
-    if (left && top) {
+  function preview({ show, left, top, url, filename, extension, width, height }: PreviewConfig) {
+    if (left && top && width && height) {
       setLeft(left);
       setTop(top);
+      setWidth(width);
+      setHeight(height);
     }
     if (url) {
       setUrl(url);
@@ -27,11 +31,11 @@ export default function usePreview(): [PreviewConfig, (pConfig: PreviewConfig) =
     if (filename) {
       setFilename(filename);
     }
-    if(extension) {
+    if (extension) {
       setExtension(extension);
     }
     setShow(show);
   }
 
-  return [{ show, left, top, filename, url, extension }, preview];
+  return [{ show, left, top, filename, url, extension, width, height }, preview];
 }

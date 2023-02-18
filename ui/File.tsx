@@ -26,8 +26,9 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
 
   function handleClick(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    preview({ show: false, left: left + 'px', top: top + 'px' });
+    e.stopPropagation();
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    preview({ show: false, left: left + 'px', top: top + 'px', height: height + 'px', width: width + 'px' });
   }
 
   function handleDBClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
@@ -40,6 +41,11 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
       preview({ show: true, filename: fileName, url: downloadURL, extension });
     }
   }
+
+  // function handleFocus(e: FocusEvent) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // }
 
   function computeStyle(): { height?: string, width?: string } | undefined {
     // console.log(thumbnail?.height);
@@ -78,7 +84,6 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
           />
         </> : ''}
         <header
-          onClickCapture={e => handleClick(e)}
           className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'
         >
           {
@@ -87,7 +92,8 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
                 <div className='overflow-hidden bg-white shadow-sm w-[85%] h-[85%] p-1'
                      style={{ ...computeStyle() ?? {} }}
                 >
-                  <div className='w-[100%] h-[100%]' style={{
+                  <div onClickCapture={e => handleClick(e)}
+                       className='w-[100%] h-[100%]' style={{
                     backgroundImage: `url(${thumbnail.url})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',

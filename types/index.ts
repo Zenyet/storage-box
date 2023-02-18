@@ -56,5 +56,7 @@ export interface PreviewConfig {
   top?: string,
   url?: string,
   filename?: string,
-  extension?: string
+  extension?: string,
+  width?: string,
+  height?: string
 }

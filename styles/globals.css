@@ -26,15 +26,15 @@
 
     .preview-trans {
         transform: translateZ(0);
-        transition: all .5s ease;
+        transition: all .5s cubic-bezier(.42,0,.58,1);
         /*transition: height .5s ease, width .5s ease, top .5s ease, left .5s ease, opacity;*/
     }
 
     .preview-show {
         opacity: 1;
         z-index: 999;
-        height: 90%;
-        width: 85%;
+        height: 90% !important;
+        width: 85% !important;
         transform: translateZ(0);
         left: 7.5% !important;
         top: 5% !important;

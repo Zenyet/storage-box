@@ -4,7 +4,7 @@ import PreviewContext from '../context';
 import { PreviewConfig } from '../types';
 import { matches } from '../utils';
 
-export default function Previewer({ show, left, top, filename, url, extension }: PreviewConfig) {
+export default function Previewer({ show, left, top, filename, url, extension, width, height }: PreviewConfig) {
   // const [destroy, setDestroy] = useState<boolean>(false);
   const preview = useContext(PreviewContext)!;
 
@@ -38,7 +38,7 @@ export default function Previewer({ show, left, top, filename, url, extension }:
   return (
     <div
       className={'preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed left-0 top-0 z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
-      style={{ left, top }}
+      style={{ left, top, width, height }}
     >
       <header className='h-[5%] flex items-center'>
         <i className='ml-3'
