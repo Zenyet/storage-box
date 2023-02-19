@@ -4,8 +4,8 @@ import { PreviewConfig } from '../types';
 
 export default function usePreview(): [PreviewConfig, (pConfig: PreviewConfig) => void] {
   const [show, setShow] = useState<boolean>(false);
-  const [left, setLeft] = useState<string>('');
-  const [top, setTop] = useState<string>('');
+  const [left, setLeft] = useState<string>('50%');
+  const [top, setTop] = useState<string>('calc(50% - 64px)');
   const [url, setUrl] = useState<string>('');
   const [filename, setFilename] = useState<string>('');
   const [extension, setExtension] = useState<string>('');
