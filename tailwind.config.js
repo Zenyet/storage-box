@@ -20,7 +20,7 @@ module.exports = {
                 'nav-active': '#dcdcdc',
                 'folder-hv':  '#e6e6e6',
                 'folder-n-hv': '#0063e1',
-                'preview-bg': '#f6f6f6',
+                'preview-bg': 'rgba(246, 246, 246, .9)',
             },
             width: {
                 'pc-w': '27.668px'
