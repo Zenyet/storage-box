@@ -29,7 +29,7 @@ export default function List({ items, href_ }: { items: ItemType[], href_?: stri
               return <Folder key={idx} href_={href_}
                              folderName={item.name} />;
             } else if (item.file && item['@microsoft.graph.downloadUrl']) {
-              return <File key={idx} thumbnail={item.thumbnails ? item?.thumbnails![0].medium : undefined} href_={href_}
+              return <File key={idx} thumbnail={item.thumbnails ? item?.thumbnails![0]?.medium : undefined} href_={href_}
                            fileName={item.name}
                            extension={computedType(item.name)}
                            downloadURL={item['@microsoft.graph.downloadUrl']} />;
