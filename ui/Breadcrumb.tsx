@@ -38,7 +38,7 @@ export default function Breadcrumb() {
     {paths!?.map((path, idx) => {
       return <li key={idx} className='flex items-center text-[13px] list-none text-gray-500'>
         <Image className='m-1' width={15} height={15} src={folderpath} alt='folder_path' />
-        <Link className='cursor-default' href={memoized[idx] ?? '/'}>{path}</Link>
+        <Link className='cursor-default' href={memoized[idx] ?? '/'}>{decodeURIComponent(path)}</Link>
         {memoized[idx] === pathName ? <></> :
           <svg className='inline-block m-1.5' xmlns='http://www.w3.org/2000/svg' width='14' height='14'
                viewBox='0 2.4 24 24'>
