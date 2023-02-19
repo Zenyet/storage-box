@@ -1,5 +1,5 @@
 'use client';
-import React, { KeyboardEvent, useContext } from 'react';
+import React, { KeyboardEvent, FocusEvent, useContext } from 'react';
 import Link from 'next/link';
 // import useMenu from '../hooks/useMenu';
 import useDownload from '../hooks/useDownload';
@@ -24,11 +24,20 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
   const preview = useContext(PreviewContext)!;
   const href: string = `${href_ ? href_ : ''}/${fileName}`;
 
+  function movingPreview<T extends React.UIEvent | React.SyntheticEvent>(e: T) {
+    if (isSafari) {
+      const { left, top, width, height } = e.currentTarget.children[1].children[0].getBoundingClientRect();
+      preview({ show: false, left: left + 'px', top: top + 'px', height: height + 'px', width: width + 'px' });
+    } else {
+      const { left, top, width, height } = e.currentTarget.children[0].children[0].getBoundingClientRect();
+      preview({ show: false, left: left + 'px', top: top + 'px', height: height + 'px', width: width + 'px' });
+    }
+  }
+
   function handleClick(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
     e.stopPropagation();
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    preview({ show: false, left: left + 'px', top: top + 'px', height: height + 'px', width: width + 'px' });
+    movingPreview<React.MouseEvent<HTMLElement>>(e);
   }
 
   function handleDBClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
@@ -42,10 +51,11 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
     }
   }
 
-  // function handleFocus(e: FocusEvent) {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  // }
+  function handleFocus(e: FocusEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    movingPreview<React.FocusEvent>(e);
+  }
 
   function computeStyle(): { height?: string, width?: string } | undefined {
     // console.log(thumbnail?.height);
@@ -73,9 +83,10 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
             */}
       {/*<Menu />*/}
       <Link href={href}
-            onClick={e => e.preventDefault()}
+            onClickCapture={e => handleClick(e)}
             onDoubleClick={e => handleDBClick(e)}
             onKeyDown={e => handleSpace(e)}
+            onFocus={e => handleFocus(e)}
             className='relative focus:outline-none flex group flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
         {isSafari ? <>
           <input
@@ -92,8 +103,8 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
                 <div className='overflow-hidden bg-white shadow-sm w-[85%] h-[85%] p-1'
                      style={{ ...computeStyle() ?? {} }}
                 >
-                  <div onClickCapture={e => handleClick(e)}
-                       className='w-[100%] h-[100%]' style={{
+                  <div
+                    className='w-[100%] h-[100%]' style={{
                     backgroundImage: `url(${thumbnail.url})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
