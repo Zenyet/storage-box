@@ -11,7 +11,7 @@ specifiers:
   eslint: 8.19.0
   eslint-config-next: latest
   ioredis: 5.3.1
-  next: latest
+  next: 13.1.6
   postcss: ^8.4.14
   prettier: ^2.7.1
   prettier-plugin-tailwindcss: ^0.1.12
