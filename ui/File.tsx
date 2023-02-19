@@ -4,10 +4,11 @@ import Link from 'next/link';
 // import useMenu from '../hooks/useMenu';
 import useDownload from '../hooks/useDownload';
 import PreviewContext from '../context';
-import { ThumbType } from '../types';
+import { Thumb } from '../types';
 import useUserAgent from '../hooks/useUserAgent';
 
 // import Menu from '@/ui/Menu';
+
 
 interface FileProps {
   fileName: string,
@@ -15,7 +16,7 @@ interface FileProps {
   downloadURL: string,
   href_?: string,
   itemId?: string,
-  thumbnail?: ThumbType
+  thumbnail?: Thumb
 }
 
 export default function File({ fileName, extension, downloadURL, href_, thumbnail }: FileProps) {

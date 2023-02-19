@@ -48,30 +48,30 @@ export default async function Page({ params }: Props) { // use catch all routes 
 
 
   let items: ItemType[] = await getSpecifiedDir(cookedURL);
-  const promises: Promise<ThumbType>[] = []; // 使用 Promise 并发好点感觉
-  const map: Map<number, number> = new Map<number, number>();
-  let flag: number = 0;
+  // const promises: Promise<ThumbType>[] = []; // 使用 Promise 并发好点感觉
+  // const map: Map<number, number> = new Map<number, number>();
+  // let flag: number = 0;
+  //
+  // items.forEach((item, index) => {
+  //   if (item.file && (item.image || item.video || computedType(item.file?.mimeType!))) {
+  //     promises.push(getThumbnail(item.id));
+  //     map.set(index, flag);
+  //     ++flag;
+  //   }
+  // });
+  // console.log(promises);
 
-  items.forEach((item, index) => {
-    if (item.file && computedType(item.file?.mimeType!)) {
-      promises.push(getThumbnail(item.id));
-      map.set(index, flag);
-      ++flag;
-    }
-  });
-
-  const thumbnails: ThumbType[] = await Promise.all<ThumbType>(promises);
-  // console.log(thumbnails);
-  //@ts-ignore
-  items = items.map((item, index) => {
-    if (map.has(index)) {
-      return {
-        ...item,
-        thumbnail: thumbnails[map.get(index)!],
-      };
-    }
-    return item;
-  });
+  // const thumbnails: ThumbType[] = await Promise.all<ThumbType>(promises);
+  // // console.log(thumbnails);
+  // items = items.map((item, index) => {
+  //   if (map.has(index)) {
+  //     return {
+  //       ...item,
+  //       thumbnail: thumbnails[map.get(index)!],
+  //     };
+  //   }
+  //   return item;
+  // });
 
   try {
     void (!items);

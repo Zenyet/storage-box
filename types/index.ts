@@ -9,13 +9,27 @@ export interface ItemType {
   parentReference: string,
   folder?: { childCount: number };
   '@microsoft.graph.downloadUrl'?: string,
+  image?: { height: number, width: number },
+  video?: {
+    audioBitsPerSample: number,
+    audioChannels: number,
+    audioFormat: string,
+    audioSamplesPerSecond: number,
+    bitrate: number,
+    duration: number,
+    fourCC: string,
+    frameRate: number,
+    height: number,
+    width: number,
+  },
   file?: {
     mimeType: string,
     hashes: {
       quickXorHash: string
     }
   },
-  thumbnail?: ThumbType
+  // thumbnail?: ThumbType,
+  thumbnails?: ThumbType[]
 }
 
 export interface RespType {
@@ -23,10 +37,17 @@ export interface RespType {
   'value': ItemType[]
 }
 
-export interface ThumbType {
+export type Thumb =  {
   height: number,
   width: number,
   url: string
+};
+
+export interface ThumbType {
+  id: string,
+  large: Thumb,
+  medium: Thumb,
+  small: Thumb
 }
 
 export interface AuthType {

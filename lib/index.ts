@@ -17,7 +17,7 @@ export async function getRootDir(): Promise<ItemType[]> {
 
 export async function getSpecifiedDir(folder_name: string): Promise<ItemType[]> {
   const access_token: string = await getAT();
-  let res: RespType = await request<RespType>(`${config.graphURL}:${folder_name}:/children`, {
+  let res: RespType = await request<RespType>(`${config.graphURL}:${folder_name}:/children/?$expand=thumbnails`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${access_token}`,
