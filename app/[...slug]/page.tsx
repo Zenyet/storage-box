@@ -25,7 +25,7 @@ export default async function Page({ params }: Props) { // use catch all routes 
 
   function computedType(name: string): boolean {
     // return name.split('.').at(-1) as string; // get final item also can use pop()!
-    return name.includes('image') || name.includes('video');
+    return name?.includes('image') || name?.includes('video');
   }
 
   params.slug.forEach((v, idx) => {
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) { // use catch all routes 
   let flag: number = 0;
 
   items.forEach((item, index) => {
-    if (computedType(item.file?.mimeType!)) {
+    if (item.file && computedType(item.file?.mimeType!)) {
       promises.push(getThumbnail(item.id));
       map.set(index, flag);
       ++flag;
