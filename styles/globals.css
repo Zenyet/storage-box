@@ -44,6 +44,11 @@
         box-shadow: 0 25px 50px -10px rgba(0, 0, 0, .3);
     }
 
+    .preview-default-pos {
+        left: 50%;
+        top: calc(50% - 64px);
+    }
+
     .line-limit {
         display: -webkit-box;
         -webkit-box-orient: vertical;

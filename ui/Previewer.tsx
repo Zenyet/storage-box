@@ -37,7 +37,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
 
   return (
     <div
-      className={'preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed left-0 top-0 z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
+      className={'preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
       style={{ left, top, width, height }}
     >
       <header className='h-[5%] flex items-center'>
