@@ -1,7 +1,6 @@
 import '@/styles/globals.css';
-import React, { Suspense } from 'react';
+import React from 'react';
 import Navbar from '@/ui/Navbar';
-import Loading from './loading';
 import Breadcrumb from '@/ui/Breadcrumb';
 // import useMenu from '../hooks/useMenu';
 
@@ -22,10 +21,11 @@ export default function RootLayout({ children }: {
         <Navbar />
       </div>
       <div className='relative w-5/6 h-screen overflow-y-auto'>
-        <Suspense fallback={<Loading />}>
-          {children}
-        </Suspense>
-        <Breadcrumb/>
+        {children}
+        {/*<Suspense fallback={<Loading />}>*/}
+        {/*  {children}*/}
+        {/*</Suspense>*/}
+        <Breadcrumb />
       </div>
     </div>
     </body>

@@ -16,8 +16,8 @@ const RT_EXPIRE: number = 60 * 60 * 24 * 85; // 过期 5 天前刷新 refresh_to
 // const client = new Redis(config.redisURL);
 
 // https://api.cloudflare.com/client/v4/accounts/account_identifier/storage/kv/namespaces/namespace_identifier/values/key_name
-function cookedURL(): string {
-  let { account_identifier, namespaces_identifier, key_name } = config;
+function cookedURL(key_name: string): string {
+  let { account_identifier, namespaces_identifier } = config;
   return `https://api.cloudflare.com/client/v4/accounts/${account_identifier}/storage/kv/namespaces/${namespaces_identifier}/values/${key_name}`;
 }
 
@@ -36,8 +36,8 @@ function isExpired(before: number, type: 'access' | 'refresh'): boolean {
   return false;
 }
 
-async function readStore(): Promise<Store> {
-  let store: Store = await request(cookedURL(), {
+export async function readStore<T>(key_name: string): Promise<T> {
+  let store: T = await request(cookedURL(key_name), {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -45,30 +45,23 @@ async function readStore(): Promise<Store> {
       'Authorization': config.x_bearer,
     },
   });
-
-  // try {
-  //   store.client_id = await client.get('client_id') as string;
-  //   store.client_secret = await client.get('client_secret') as string;
-  //   store.ac_before = await client.get('ac_before') as string;
-  //   store.rf_before = await client.get('rf_before') as string;
-  //   store.access_token = await client.get('access_token') as string;
-  //   store.refresh_token = await client.get('refresh_token') as string;
-  //   store.redirect_uri = await client.get('redirect_uri') as string;
-  // } catch (e) {
-  //   console.log('@Oops: ', e);
-  // }
-  // try {
-  //   store = { ...JSON.parse(fs.readFileSync(PATH, 'utf-8')) };
-  // } catch (e) {
-  //   console.log('@Oops: ', e);
-  // }
   return store;
+}
+
+export async function getATFromKV(): Promise<string> {
+  let promise1: Promise<number> = readStore<number>('ac_before');
+  let promise2: Promise<number> = readStore<number>('rf_before');
+  let [ac_before, rf_before] = await Promise.all([promise1, promise2]);
+  if (isExpired(ac_before, 'access')) {
+    return await readStore<string>('access_token');
+  }
+  return '';
 }
 
 export async function getAT(): Promise<string> {
   const body = new URLSearchParams();
-  const formData: FormData = new URLSearchParams();
-  const store: Store = await readStore();
+  const formData: FormData = new FormData();
+  const store: Store = await readStore<Store>('box');
   const { client_id, client_secret, redirect_uri, access_token, refresh_token, ac_before, rf_before } = store;
   body.append('client_id', client_id as string);
   body.append('redirect_uri', redirect_uri as string);
@@ -98,47 +91,42 @@ export async function getAT(): Promise<string> {
     const stringify: string = JSON.stringify(store);
     formData.append('metadata', '{}');
     formData.append('value', stringify);
-    await request(cookedURL(), {
+    request(cookedURL('box'), {
       method: 'PUT',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'X-Auth-Email': config.x_auth_email,
+        'Authorization': config.x_bearer,
+      },
+      body: formData,
+    }).catch();
+    return newAT.access_token;
+  } else if (isExpired(ac_before as number, 'access')) {
+    const newAT: AuthType = await request(config.OAuthURL + '/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+    });
+    // const before: number = (new Date().getTime()) / 1000;
+    // fs.writeFileSync(PATH, JSON.stringify(store));
+
+    store.access_token = newAT.access_token;
+    store.ac_before = (new Date().getTime()) / 1000;
+    const stringify: string = JSON.stringify(store);
+    formData.append('metadata', '{}');
+    formData.append('value', stringify);
+    const res = await request(cookedURL('box'), {
+      method: 'PUT',
+      headers: {
         'X-Auth-Email': config.x_auth_email,
         'Authorization': config.x_bearer,
       },
       body: formData,
     });
+    // client.set('access_token', newAT.access_token);
+    // client.set('ac_before', before);
     return newAT.access_token;
-  } else {
-    if (isExpired(ac_before as number, 'access')) {
-      const newAT: AuthType = await request(config.OAuthURL + '/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body,
-      });
-      // const before: number = (new Date().getTime()) / 1000;
-      // fs.writeFileSync(PATH, JSON.stringify(store));
-
-      store.access_token = newAT.access_token;
-      store.ac_before = (new Date().getTime()) / 1000;
-      const stringify: string = JSON.stringify(store);
-      formData.append('metadata', '{}');
-      formData.append('value', stringify);
-      await request(cookedURL(), {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-Auth-Email': config.x_auth_email,
-          'Authorization': config.x_bearer,
-        },
-        body: formData,
-      });
-
-      // client.set('access_token', newAT.access_token);
-      // client.set('ac_before', before);
-      return newAT.access_token;
-    }
   }
   return access_token;
 }

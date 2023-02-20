@@ -19,14 +19,18 @@ type Props = {
 
 
 export default async function Page({ params }: Props) { // use catch all routes that params will be string[] fk!
+  if (params.slug[0] === 'about') {
+    return <About />;
+  }
+
   const href_: string = params.slug.join('/');
   const len: number = params.slug.length;
   let cookedURL: string = '/';
 
-  function computedType(name: string): boolean {
-    // return name.split('.').at(-1) as string; // get final item also can use pop()!
-    return name?.includes('image') || name?.includes('video');
-  }
+  // function computedType(name: string): boolean {
+  //   // return name.split('.').at(-1) as string; // get final item also can use pop()!
+  //   return name?.includes('image') || name?.includes('video');
+  // }
 
   params.slug.forEach((v, idx) => {
     if (idx !== len || len === 0) {
@@ -73,51 +77,50 @@ export default async function Page({ params }: Props) { // use catch all routes 
   //   return item;
   // });
 
-  try {
-    void (!items);
-  } catch (e) {
-    console.log(e);
-    return <NotFound />;
-  }
+  // try {
+  //   void (!items);
+  // } catch (e) {
+  //   console.log(e);
+  //   return <NotFound />;
+  // }
+  //
+  // if (!items.length) {
+  //   return (
+  //     <Background>
+  //       <h2 className='font-bold text-4xl'>空空如也...</h2>
+  //     </Background>
+  //   );
+  // }
+  //
+  // const newItems: ItemType[] = items.map(item => {
+  //   const o: any = {};
+  //   if (item.file) {
+  //     o.file = item.file;
+  //   }
+  //   if (item.folder) {
+  //     o.folder = item.folder;
+  //   }
+  //   if (item.image) {
+  //     o.image = item.image;
+  //   }
+  //   if (item.video) {
+  //     o.video = item.video;
+  //   }
+  //   if (item.thumbnails) {
+  //     o.thumbnails = item.thumbnails;
+  //   }
+  //   if (item['@microsoft.graph.downloadUrl']) {
+  //     o['@microsoft.graph.downloadUrl'] = item['@microsoft.graph.downloadUrl'];
+  //   }
+  //   return {
+  //     id: item.id,
+  //     name: item.name,
+  //     lastModifiedDateTime: item.lastModifiedDateTime,
+  //     ...o,
+  //   };
+  // });
 
-  if (!items.length) {
-    return (
-      <Background>
-        <h2 className='font-bold text-4xl'>空空如也...</h2>
-      </Background>
-    );
-  }
-
-  const newItems: ItemType[] = items.map(item => {
-    const o: any = {};
-    if (item.file) {
-      o.file = item.file;
-    }
-    if (item.folder) {
-      o.folder = item.folder;
-    }
-    if (item.image) {
-      o.image = item.image;
-    }
-    if (item.video) {
-      o.video = item.video;
-    }
-    if (item.thumbnails) {
-      o.thumbnails = item.thumbnails;
-    }
-    if (item['@microsoft.graph.downloadUrl']) {
-      o['@microsoft.graph.downloadUrl'] = item['@microsoft.graph.downloadUrl'];
-    }
-    return {
-      id: item.id,
-      name: item.name,
-      lastModifiedDateTime: item.lastModifiedDateTime,
-      ...o,
-    };
-  });
-
-
-  return <List items={newItems} href_={href_} />;
+  return <List href_={href_} cookedURL={cookedURL} />;
 }
 
 

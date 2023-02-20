@@ -1,8 +1,10 @@
+"use client";
 import React from 'react';
 
-export default function Loading() {
-  return <div className='flex items-center justify-center w-[100%] h-[100%]'>
-    <svg className='animate-spin' xmlns='http://www.w3.org/2000/svg' version='1.0' width='24' height='24' viewBox='0 0 128 128'
+export default function LoadingUI() {
+  return <div className='absolute flex items-center justify-center w-[100%] h-[100%]'>
+    <svg className='animate-spin' xmlns='http://www.w3.org/2000/svg' version='1.0' width='24' height='24'
+         viewBox='0 0 128 128'
          xmlSpace='preserve'>
       <rect width='100%' height='100%' fill='#FFF' />
       <g>
