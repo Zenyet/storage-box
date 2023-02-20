@@ -52,6 +52,7 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
   }
 
   function handleSpace(e: KeyboardEvent) {
+    e.preventDefault();
     if (e.code === 'Space') {
       preview({ show: true, filename: fileName, url: downloadURL, extension });
     }
