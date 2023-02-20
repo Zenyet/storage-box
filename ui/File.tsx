@@ -105,7 +105,7 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
           className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'
         >
           {
-            data ?
+            data?.url ?
               <>
                 <div className='overflow-hidden bg-white shadow-sm w-[85%] h-[85%] p-1'
                      style={{ ...computeStyle() ?? {} }}
