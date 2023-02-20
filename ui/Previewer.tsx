@@ -62,7 +62,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
       </header>
       <footer className='flex items-center justify-center overflow-hidden h-[95%] rounded-[4px] m-1.5'>
         {matches(extension as string, 'image') &&
-          <img className='rounded-[4px] max-w-full' src={url} alt='preview' />}
+          <img loading='lazy' className='rounded-[4px] max-w-full' src={url} alt='preview' />}
         {matches(extension as string, 'video') &&
           <video ref={videoRef} autoPlay={true} controls className='rounded-[4px] w-[100%] max-w-full'
                  src={url}></video>}
