@@ -12,7 +12,7 @@ import LoadingUI from '@/ui/LoadingUI';
 
 export default function List({ href_, cookedURL }: { href_?: string, cookedURL?: string }) {
   const [pConfig, preview] = usePreview();
-  const fetcher: Fetcher<ItemType[], string> = async (url) => fetch(url).then((res) => res.json());
+  const fetcher: Fetcher<ItemType[], string> = (url) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(cookedURL ? `/api/specified/?path=${cookedURL}` : '/api/root', fetcher);
 
   function computedType(name: string): string {
@@ -34,11 +34,13 @@ export default function List({ href_, cookedURL }: { href_?: string, cookedURL?:
               return <Folder key={idx} href_={href_}
                              folderName={item.name} />;
             } else if (item.file && item['@microsoft.graph.downloadUrl']) {
-              return <File key={idx} thumbnail={item.thumbnails ? item?.thumbnails![0]?.medium : undefined}
+              return <File key={idx}
+                           id={item.id}
+                           downloadURL={item['@microsoft.graph.downloadUrl']}
                            href_={href_}
                            fileName={item.name}
                            extension={computedType(item.name)}
-                           downloadURL={item['@microsoft.graph.downloadUrl']} />;
+              />;
             }
           })
         }

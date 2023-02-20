@@ -6,24 +6,29 @@ import useDownload from '../hooks/useDownload';
 import PreviewContext from '../context';
 import { Thumb } from '../types';
 import useUserAgent from '../hooks/useUserAgent';
+import useSWR, { Fetcher } from 'swr';
 
 // import Menu from '@/ui/Menu';
 
 
 interface FileProps {
+  id: string,
+  downloadURL: string,
   fileName: string,
   extension: string,
-  downloadURL: string,
   href_?: string,
   itemId?: string,
-  thumbnail?: Thumb
 }
 
-export default function File({ fileName, extension, downloadURL, href_, thumbnail }: FileProps) {
+export default function File({ id, downloadURL, fileName, extension, href_ }: FileProps) {
   // const [, MENU_ID] = useMenu();
   const isSafari: boolean = useUserAgent();
   const preview = useContext(PreviewContext)!;
   const href: string = `${href_ ? href_ : ''}/${fileName}`;
+  const fetcher: Fetcher<Thumb, string> = (url) => fetch(url).then((res) => res.json());
+
+  const { data, error, isLoading } = useSWR(`/api/thumbnail?id=${id}`, fetcher);
+
 
   function movingPreview<T extends React.UIEvent | React.SyntheticEvent>(e: T) {
     if (isSafari) {
@@ -60,14 +65,14 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
 
   function computeStyle(): { height?: string, width?: string } | undefined {
     // console.log(thumbnail?.height);
-    if (thumbnail && thumbnail.width > 140 && thumbnail.height < thumbnail.width) {
-      const radio = thumbnail.height / thumbnail.width;
+    if (data && data.width > 140 && data.height < data.width) {
+      const radio = data.height / data.width;
       return {
         height: 115 * radio + 'px',
       };
     }
-    if (thumbnail && thumbnail.height > 140 && thumbnail.width < thumbnail.height) {
-      const radio = thumbnail.width / thumbnail.height;
+    if (data && data.height > 140 && data.width < data.height) {
+      const radio = data.width / data.height;
       return {
         width: 115 * radio + 'px',
       };
@@ -99,14 +104,14 @@ export default function File({ fileName, extension, downloadURL, href_, thumbnai
           className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'
         >
           {
-            thumbnail ?
+            data ?
               <>
                 <div className='overflow-hidden bg-white shadow-sm w-[85%] h-[85%] p-1'
                      style={{ ...computeStyle() ?? {} }}
                 >
                   <div
                     className='w-[100%] h-[100%]' style={{
-                    backgroundImage: `url(${thumbnail.url})`,
+                    backgroundImage: `url(${data.url})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',

@@ -5,9 +5,9 @@ import { request } from '../../utils';
 import config from '../../config';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const {path} = req.query;
+  const { path } = req.query;
   const access_token: string = await getAT();
-  let resp: RespType = await request<RespType>(`${config.graphURL}:${path}:/children/?$expand=thumbnails`, {
+  let resp: RespType = await request<RespType>(`${config.graphURL}:${path}:/children/??select=id,name,size,folder,file,image,video,@microsoft.graph.downloadUrl`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${access_token}`,
