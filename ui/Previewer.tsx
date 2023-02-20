@@ -64,7 +64,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
         {matches(extension as string, 'image') &&
           <img className='rounded-[4px] max-w-full' src={url} alt='preview' />}
         {matches(extension as string, 'video') &&
-          <video ref={videoRef} autoPlay={show} controls={show} className='rounded-[4px] w-[100%] max-w-full'
+          <video ref={videoRef} autoPlay={true} controls className='rounded-[4px] w-[100%] max-w-full'
                  src={url}></video>}
       </footer>
     </div>
