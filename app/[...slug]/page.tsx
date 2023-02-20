@@ -1,8 +1,8 @@
 import React from 'react';
 import About from '@/ui/About';
-import NotFound from '@/ui/not-found';
-import { getSpecifiedDir, getThumbnail } from '@/lib/index';
-import { ItemType, ThumbType } from '../../types';
+// import NotFound from '@/ui/not-found';
+// import { getSpecifiedDir } from '@/lib/index';
+// import { ItemType } from '../../types';
 import List from '@/ui/List';
 import Background from '@/ui/Background';
 // import { notFound } from 'next/navigation';
@@ -41,9 +41,7 @@ export default async function Page({ params }: Props) { // use catch all routes 
       }
     }
   });
-  if (params.slug[0] === 'about') {
-    return <About />;
-  }
+
   // if (params.slug[0] === 'folder1') {
   //   return <NotFound />;
   //   //notFound() // don's understand why didn't work... I think it also needs 13.2? ?
@@ -51,7 +49,9 @@ export default async function Page({ params }: Props) { // use catch all routes 
   // }
 
 
-  let items: ItemType[] = await getSpecifiedDir(cookedURL);
+  }
+
+  // const items: ItemType[] = await getSpecifiedDir(cookedURL);
   // const promises: Promise<ThumbType>[] = []; // 使用 Promise 并发好点感觉
   // const map: Map<number, number> = new Map<number, number>();
   // let flag: number = 0;
