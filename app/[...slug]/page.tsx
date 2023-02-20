@@ -88,7 +88,36 @@ export default async function Page({ params }: Props) { // use catch all routes 
     );
   }
 
-  return <List items={items} href_={href_} />;
+  const newItems: ItemType[] = items.map(item => {
+    const o: any = {};
+    if (item.file) {
+      o.file = item.file;
+    }
+    if (item.folder) {
+      o.folder = item.folder;
+    }
+    if (item.image) {
+      o.image = item.image;
+    }
+    if (item.video) {
+      o.video = item.video;
+    }
+    if (item.thumbnails) {
+      o.thumbnails = item.thumbnails;
+    }
+    if (item['@microsoft.graph.downloadUrl']) {
+      o['@microsoft.graph.downloadUrl'] = item['@microsoft.graph.downloadUrl'];
+    }
+    return {
+      id: item.id,
+      name: item.name,
+      lastModifiedDateTime: item.lastModifiedDateTime,
+      ...o,
+    };
+  });
+
+
+  return <List items={newItems} href_={href_} />;
 }
 
 

@@ -1,12 +1,12 @@
 export interface ItemType {
-  createdDateTime: string,
-  eTag: string,
   id: string,
   lastModifiedDateTime: string,
   name: string,
-  cTag: string,
-  size: number,
-  parentReference: string,
+  createdDateTime?: string,
+  eTag?: string,
+  cTag?: string,
+  size?: number,
+  parentReference?: string,
   folder?: { childCount: number };
   '@microsoft.graph.downloadUrl'?: string,
   image?: { height: number, width: number },
