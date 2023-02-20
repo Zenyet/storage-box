@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PreviewContext from '../context';
 import { PreviewConfig } from '../types';
 import { matches } from '../utils';
@@ -7,6 +7,7 @@ import { matches } from '../utils';
 export default function Previewer({ show, left, top, filename, url, extension, width, height }: PreviewConfig) {
   // const [destroy, setDestroy] = useState<boolean>(false);
   const preview = useContext(PreviewContext)!;
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // setDestroy(false);
@@ -14,6 +15,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
     function listener(e: KeyboardEvent) {
       // e.preventDefault(); 除了ESC或者其他绑定时间 code能执行，其他都不行了..
       if (e.code === 'Escape') {
+        videoRef!?.current!?.pause();
         preview({ show: false });
       }
     }
@@ -25,6 +27,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
   }, [show]);
 
   function handleClick() {
+    videoRef!?.current!?.pause();
     preview({ show: false });
   }
 
@@ -61,7 +64,8 @@ export default function Previewer({ show, left, top, filename, url, extension, w
         {matches(extension as string, 'image') &&
           <img className='rounded-[4px] max-w-full' src={url} alt='preview' />}
         {matches(extension as string, 'video') &&
-          <video controls className='rounded-[4px] w-[100%] max-w-full' src={url}></video>}
+          <video ref={videoRef} autoPlay={show} controls={show} className='rounded-[4px] w-[100%] max-w-full'
+                 src={url}></video>}
       </footer>
     </div>
   );
