@@ -27,7 +27,7 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
   const href: string = `${href_ ? href_ : ''}/${fileName}`;
   const fetcher: Fetcher<Thumb, string> = (url) => fetch(url).then((res) => res.json());
 
-  const { data, error, isLoading } = useSWR(`/api/thumbnail?id=${id}`, fetcher);
+  const { data } = useSWR(`/api/thumbnail?id=${id}`, fetcher);
 
 
   function movingPreview<T extends React.UIEvent | React.SyntheticEvent>(e: T) {
@@ -139,6 +139,5 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
           className='max-w-[100%] line-limit overflow-hidden text-ellipsis text-gray-700 text-[13px] mt-0.5 px-1 rounded-[4px] group-focus:bg-folder-n-hv group-focus:text-white'>{fileName}</p>
       </Link>
     </>
-  )
-    ;
+  );
 }

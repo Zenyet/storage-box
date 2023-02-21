@@ -1,13 +1,36 @@
 'use client';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PreviewContext from '../context';
 import { PreviewConfig } from '../types';
 import { matches } from '../utils';
+import { micromark } from 'micromark';
+import { gfm, gfmHtml } from 'micromark-extension-gfm';
 
 export default function Previewer({ show, left, top, filename, url, extension, width, height }: PreviewConfig) {
   // const [destroy, setDestroy] = useState<boolean>(false);
   const preview = useContext(PreviewContext)!;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [rawHTML, setRawHTML] = useState<string>('');
+  const isText: boolean = matches(extension as string, 'text');
+
+  if (isText) {
+    let rawText: string = '';
+    fetch(url!).then(res => res.blob()).then(blob => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        if (extension === 'md') {
+          rawText = fileReader.result + '';
+        } else {
+          rawText = '```\n ' + fileReader.result + '\n```';
+        }
+        setRawHTML(micromark(rawText, {
+          extensions: [gfm()],
+          htmlExtensions: [gfmHtml()],
+        }));
+      };
+      fileReader.readAsText(blob);
+    });
+  }
 
   useEffect(() => {
     // setDestroy(false);
@@ -40,7 +63,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
 
   return (
     <div
-      className={'backdrop-blur-md preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? 'preview-show' : '')}
+      className={'backdrop-blur-md preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? (isText ? 'preview-text' : 'preview-show') : '')}
       style={{ left, top, width, height }}
     >
       <header className='h-[5%] flex items-center'>
@@ -66,6 +89,9 @@ export default function Previewer({ show, left, top, filename, url, extension, w
         {matches(extension as string, 'video') &&
           <video ref={videoRef} autoPlay={true} controls className='rounded-[4px] w-[100%] max-w-full'
                  src={url}></video>}
+        {matches(extension as string, 'text') &&
+          <div className='text w-[100%] h-[100%] p-1.5 rounded-[4px] overflow-x-hidden overflow-y-auto bg-white'
+               dangerouslySetInnerHTML={{ __html: rawHTML }}></div>}
       </footer>
     </div>
   );

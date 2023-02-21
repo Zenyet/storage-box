@@ -3,11 +3,70 @@
 @tailwind utilities;
 
 @layer base {
+    h1, h2, h3, h4, h5, h6 {
+        display: block;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        font-weight: bold;
+    }
+    h1 {
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-inline-end: 0;
+    }
+    h2 {
+        font-size: 1.5em;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+    }
+    h3 {
+        font-size: 1.17em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+
+    h4 {
+        margin-block-start: 1.33em;
+        margin-block-end: 1.33em;
+    }
+
+    h5 {
+        font-size: 0.83em;
+        margin-block-start: 1.67em;
+        margin-block-end: 1.67em;
+    }
+
+    h6 {
+        font-size: 0.67em;
+        margin-block-start: 2.33em;
+        margin-block-end: 2.33em;
+    }
+
+    pre {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    code {
+        display: flex;
+        white-space: pre-wrap;
+        word-break: break-all;
+        width: 100%;
+    }
+
+    .text::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: #7f7f7f;
+    }
+
+    .text::-webkit-scrollbar {
+        width: 8px;
+    }
+
     :root {
 
     }
 }
-
 
 @layer utilities {
     .clip-top-right {
@@ -38,6 +97,15 @@
         transform: translateZ(0);
         left: 7.5% !important;
         top: 5% !important;
+    }
+    .preview-text {
+        opacity: 1;
+        z-index: 999;
+        height: 95% !important;
+        width: 50% !important;
+        transform: translateZ(0);
+        left: 25% !important;
+        top: 2.5% !important;
     }
 
     .preview-shadow {
