@@ -6,7 +6,7 @@ export default function LoadingUI() {
     <svg className='animate-spin' xmlns='http://www.w3.org/2000/svg' version='1.0' width='24' height='24'
          viewBox='0 0 128 128'
          xmlSpace='preserve'>
-      <rect width='100%' height='100%' fill='#FFF' />
+      <rect width='100%' height='100%' fill='transparent' />
       <g>
         <path
           d='M.6 57.54c5.73-6.23 17.33-15.5 33.66-12.35C55.4 48.5 64 63.95 64 63.95S42.42 65 30.28 83.63a38.63 38.63 0 0 0-3.4 32.15 64.47 64.47 0 0 1-5.52-4.44A63.64 63.64 0 0 1 .6 57.54z'
