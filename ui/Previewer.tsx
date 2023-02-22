@@ -90,7 +90,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
           <video ref={videoRef} autoPlay={true} controls className='rounded-[4px] w-[100%] max-w-full'
                  src={url}></video>}
         {matches(extension as string, 'text') &&
-          <div className='text w-[100%] h-[100%] p-1.5 rounded-[4px] overflow-x-hidden overflow-y-auto bg-white'
+          <div className='text w-[100%] h-[100%] p-1.5 rounded-[4px] overflow-x-hidden overflow-y-auto bg-white dark:bg-text-bg'
                dangerouslySetInnerHTML={{ __html: rawHTML }}></div>}
       </footer>
     </div>

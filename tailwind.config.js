@@ -23,6 +23,7 @@ module.exports = {
                 'nav-active': '#dcdcdc',
                 'folder-hv':  '#e6e6e6',
                 'folder-n-hv': '#0063e1',
+                'text-bg': '#1e1e1e'
             },
             width: {
                 'pc-w': '27.668px'
