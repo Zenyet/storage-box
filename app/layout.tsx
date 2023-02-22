@@ -15,9 +15,9 @@ export default function RootLayout({ children }: {
     <head>
       <title>/dev/disk0</title>
     </head>
-    <body className='overflow-y-scroll bg-white h-screen'>
+    <body className='overflow-y-scroll bg-white dark:bg-body-dark h-screen'>
     <div className='flex relative overflow-hidden'>
-      <div className='w-1/6 border-r-[1px]'>
+      <div className='w-1/6 border-r-[1px] dark:border-black'>
         <Navbar />
       </div>
       <div className='relative w-5/6 h-screen overflow-y-auto'>

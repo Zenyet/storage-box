@@ -17,10 +17,12 @@ module.exports = {
                 'fold-from': '#fefefe',
                 'file-type': '#7f7f7f',
                 'nav': '#f6f6f6',
+                'nav-dark': '#383838',
+                'body-dark': '#1e1e1e',
+                'bread-dark': '#373737',
                 'nav-active': '#dcdcdc',
                 'folder-hv':  '#e6e6e6',
                 'folder-n-hv': '#0063e1',
-                'preview-bg': 'rgba(246, 246, 246, .85)',
             },
             width: {
                 'pc-w': '27.668px'

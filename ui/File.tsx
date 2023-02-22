@@ -102,7 +102,7 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
           />
         </> : ''}
         <header
-          className='w-[100%] flex justify-center items-center file-drop group-focus:bg-folder-hv w-[128px] h-[128px] rounded-md'
+          className='w-[100%] flex justify-center items-center file-drop group-focus:folder-active w-[128px] h-[128px] rounded-md'
         >
           {
             data?.url ?
@@ -136,7 +136,7 @@ export default function File({ id, downloadURL, fileName, extension, href_ }: Fi
           }
         </header>
         <p
-          className='max-w-[100%] line-limit overflow-hidden text-ellipsis text-gray-700 text-[13px] mt-0.5 px-1 rounded-[4px] group-focus:bg-folder-n-hv group-focus:text-white'>{fileName}</p>
+          className='max-w-[100%] line-limit overflow-hidden text-ellipsis text-gray-700 dark:text-fold-from text-[13px] mt-0.5 px-1 rounded-[4px] group-focus:bg-folder-n-hv group-focus:text-white'>{fileName}</p>
       </Link>
     </>
   );

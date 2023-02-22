@@ -34,9 +34,10 @@ export default function Breadcrumb() {
     setMemoized(newMemoized);
   }, [pathName]);
 
-  return <div className='pl-3 flex items-center w-[100%] h-[1.8rem] fixed z-50 bg-white bottom-0 border-t-[1px]'>
+  return <div
+    className='pl-3 flex items-center w-[100%] h-[1.8rem] fixed z-50 bg-white dark:bg-body-dark bottom-0 border-t-[1px] dark:border-t-bread-dark'>
     {paths!?.map((path, idx) => {
-      return <li key={idx} className='flex items-center text-[13px] list-none text-gray-500'>
+      return <li key={idx} className='flex items-center text-[13px] list-none text-gray-500 dark:text-gray-100'>
         <Image className='m-1' width={15} height={15} src={folderpath} alt='folder_path' />
         <Link className='cursor-default' href={memoized[idx] ?? '/'}>{decodeURIComponent(path)}</Link>
         {memoized[idx] === pathName ? <></> :

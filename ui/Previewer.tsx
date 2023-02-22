@@ -63,14 +63,14 @@ export default function Previewer({ show, left, top, filename, url, extension, w
 
   return (
     <div
-      className={'backdrop-blur-md preview-shadow border-[1px] border-gray-300 flex flex-col w-[128px] h-[128px] bg-preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? (isText ? 'preview-text' : 'preview-show') : '')}
+      className={'backdrop-blur-md preview-shadow border-[1px] border-gray-300 dark:border-gray-700 flex flex-col w-[128px] h-[128px] preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? (isText ? 'preview-text' : 'preview-show') : '')}
       style={{ left, top, width, height }}
     >
       <header className='h-[5%] flex items-center'>
         <i className='ml-3'
            onClick={() => handleClick()}
         >
-          <svg className='active:fill-gray-300' xmlns='http://www.w3.org/2000/svg' width='13.944' height='13.945'>
+          <svg xmlns='http://www.w3.org/2000/svg' width='13.944' height='13.945'>
             <path
               d='M6.968 13.937c3.812 0 6.976-3.157 6.976-6.969C13.944 3.157 10.772 0 6.96 0 3.156 0 0 3.157 0 6.968c0 3.812 3.163 6.969 6.968 6.969Z'
               fill='#777' />
@@ -79,7 +79,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
               fill='#fff' />
           </svg>
         </i>
-        <span className='text-[14px] font-bold text-gray-500 ml-2.5'>
+        <span className='text-[14px] font-bold text-gray-500 dark:text-fold-from ml-2.5'>
           {filename}
         </span>
       </header>
