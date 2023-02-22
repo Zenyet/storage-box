@@ -49,7 +49,8 @@ export default function Previewer({ show, left, top, filename, url, extension, w
     };
   }, [show]);
 
-  function handleClick() {
+  function handleClick(e: React.MouseEvent) {
+    e.preventDefault();
     videoRef!?.current!?.pause();
     preview({ show: false });
   }
@@ -68,7 +69,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
     >
       <header className='h-[5%] flex items-center'>
         <i className='ml-3'
-           onClick={() => handleClick()}
+           onClick={e => handleClick(e)}
         >
           <svg xmlns='http://www.w3.org/2000/svg' width='13.944' height='13.945'>
             <path
