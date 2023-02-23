@@ -24,5 +24,5 @@ export default function Page() {
   //     ...o
   //   };
   // });
-  return <div>test</div>
+  return <List />;
 }
