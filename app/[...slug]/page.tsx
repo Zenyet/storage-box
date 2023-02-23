@@ -20,7 +20,7 @@ type Props = {
 // generate title base params not work.....
 
 
-export default async function Page({ params }: Props) { // use catch all routes that params will be string[] fk!
+export default function Page({ params }: Props) { // use catch all routes that params will be string[] fk!
   if (params.slug[0] === 'about') {
     return <About />;
   }

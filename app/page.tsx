@@ -3,7 +3,7 @@
 import React from 'react';
 import List from '@/ui/List';
 
-export default async function Page() {
+export default function RootPage() {
   // const items: ItemType[] = await getRootDir();
   // const newItems: ItemType[] = items.map(item => {
   //   const o: any = {};
