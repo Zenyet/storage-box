@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation';
 export default function Navbar() {
   const path = usePathname(); // i think there's no that type thing :))
   return <>
-    <nav className='w-[100%] h-[100%] backdrop-blur-md sm:backdrop-blur-none bg-mobile-bg-nav dark:bg-mobile-nav-dark  sm:bg-nav sm:dark:bg-nav-dark flex flex-row sm:flex-col justify-center items-center'>
-      <Link href={''}
+    <nav
+      className='w-[100%] h-[100%] backdrop-blur-md sm:backdrop-blur-none bg-mobile-bg-nav dark:bg-mobile-nav-dark  sm:bg-nav sm:dark:bg-nav-dark flex flex-row sm:flex-col justify-center items-center'>
+      <Link href='/'
             className={'flex items-center justify-center sm:justify-start cursor-default w-1/3 sm:w-5/6 px-2 py-2 rounded-md select-none text-gray-700 dark:text-gray-200 ' + (path !== '/about' ? 'nav-active' : '')}>
         <svg className='fill-gray-600 dark:fill-zinc-400' version='1.1' xmlns='http://www.w3.org/2000/svg'
              xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -20,10 +21,11 @@ export default function Navbar() {
         </svg>
         <span className='text-xs px-2'>/dev/disk0</span>
       </Link>
-      <Link href={'/about'}
+      <Link href='/about'
             className={'flex items-center justify-center sm:justify-start cursor-default w-1/3 sm:w-5/6 px-2 py-2 rounded-md select-none text-gray-700 dark:text-gray-200 ' + (path === '/about' ? 'nav-active' : '')}>
         <div>
-          <svg className='fill-gray-600 dark:fill-zinc-400' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'
+          <svg className='fill-gray-600 dark:fill-zinc-400' version='1.1' xmlns='http://www.w3.org/2000/svg'
+               xmlnsXlink='http://www.w3.org/1999/xlink'
                width='18.4453' height='17'>
             <g>
               <path
