@@ -1,22 +1,14 @@
 'use client'; // use router must be used in client component
 import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const path = usePathname(); // i think there's no that type thing :))
-  const router = useRouter();
-
-  function handleClick(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push('/');
-  }
-
   return <>
     <nav
       className='w-[100%] h-[100%] backdrop-blur-md sm:backdrop-blur-none bg-mobile-bg-nav dark:bg-mobile-nav-dark  sm:bg-nav sm:dark:bg-nav-dark flex flex-row sm:flex-col justify-center items-center'>
-      <Link href={''} onClick={e => handleClick(e)}
+      <Link href={'/'} prefetch={false}
             className={'flex items-center justify-center sm:justify-start cursor-default w-1/3 sm:w-5/6 px-2 py-2 rounded-md select-none text-gray-700 dark:text-gray-200 ' + (path !== '/about' ? 'nav-active' : '')}>
         <svg className='fill-gray-600 dark:fill-zinc-400' version='1.1' xmlns='http://www.w3.org/2000/svg'
              xmlnsXlink='http://www.w3.org/1999/xlink'
