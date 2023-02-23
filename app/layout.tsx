@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 import React from 'react';
 import Navbar from '@/ui/Navbar';
 import Breadcrumb from '@/ui/Breadcrumb';
-import { Suspense } from 'react';
 // import useMenu from '../hooks/useMenu';
 
 export default function RootLayout({ children }: {
@@ -23,9 +22,7 @@ export default function RootLayout({ children }: {
         <Navbar />
       </div>
       <div className='relative w-full pb-14 sm:pb-0 sm:w-5/6 h-screen z-10 sm:z-50 overflow-y-auto'>
-        <Suspense>
-          {children}
-        </Suspense>
+        {children}
         <Breadcrumb />
       </div>
     </div>
