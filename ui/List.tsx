@@ -27,7 +27,7 @@ export default function List({ href_, cookedURL }: { href_?: string, cookedURL?:
       <Previewer show={pConfig.show} left={pConfig.left} top={pConfig.top} width={pConfig.width} height={pConfig.height}
                  filename={pConfig.filename}
                  url={pConfig.url} extension={pConfig.extension} />
-      <div className='relative z-10 w-[90%] grid grid-cols-7 gap-6 mx-auto my-10 text-gray-700'>
+      <div className='relative z-10 w-[90%] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 mx-auto my-10 text-gray-700'>
         {
           data?.map((item, idx) => {
             if (item.folder) {

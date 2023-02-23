@@ -16,15 +16,25 @@ export default function Folder({ locked, folderName, href_ }: {
 }) {
   const href: string = `${href_ ? href_ : ''}/${folderName}`;
   const router = useRouter();
-  const isSafari: boolean = useUserAgent();
+  const [isSafari, isMobile]: [boolean, boolean] = useUserAgent();
 
   function handleDBClick(e: MouseEvent) {
-    e.preventDefault();
-    router.push(href);
+    if (!isMobile) {
+      e.preventDefault();
+      router.push(href);
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  function handleClick(e: MouseEvent) {
+    if (!isMobile) {
+      e.preventDefault();
+    }
   }
 
   return (
-    <Link href={href} onClick={e => e.preventDefault()}
+    <Link href={href} onClick={e => handleClick(e)}
           onDoubleClick={e => handleDBClick(e)}
           className='relative group focus:outline-none flex flex-col items-center w-[140px] my-2 select-none justify-self-center cursor-default'>
       {isSafari ? <>

@@ -35,7 +35,7 @@ export default function Breadcrumb() {
   }, [pathName]);
 
   return <div
-    className='pl-3 flex items-center w-[100%] h-[1.8rem] fixed z-50 bg-white dark:bg-body-dark bottom-0 border-t-[1px] dark:border-t-bread-dark'>
+    className='pl-3 flex items-center w-[100%] h-[1.8rem] fixed top-0 sm:top-auto sm:bottom-0 z-50 backdrop-blur-md sm:backdrop-blur-none bg-bread-bg dark:bg-bread-dark-bg sm:bg-white sm:dark:bg-body-dark border-b-[1px] dark:border-b-gray-900 sm:border-t-[1px] sm:border-b-0 sm:dark:border-t-bread-dark'>
     {paths!?.map((path, idx) => {
       return <li key={idx} className='flex items-center text-[13px] list-none text-gray-500 dark:text-gray-100'>
         <Image className='m-1' width={15} height={15} src={folderpath} alt='folder_path' />

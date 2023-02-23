@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Background({ children }: { children: React.ReactNode }) {
   return (
-    <div className='relative w-[100%] h-[100%] flex items-center'>
-      <div className='ml-32 mb-32'>
+    <div className='relative w-[100%] h-[100%] flex items-center justify-center sm:justify-start'>
+      <div className='sm:ml-32 sm:mb-32 relative z-30'>
         {children}
       </div>
       <svg className='blur-[100px] scale-75 absolute right-0 top-1/2 translate-y-[-50%]' width='600' height='586'

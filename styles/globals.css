@@ -108,7 +108,7 @@
 
     .preview-show {
         opacity: 1;
-        z-index: 999;
+        z-index: 9999;
         height: 90% !important;
         width: 85% !important;
         transform: translateZ(0);

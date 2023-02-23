@@ -22,7 +22,7 @@ interface FileProps {
 
 export default function File({ id, downloadURL, fileName, extension, href_ }: FileProps) {
   // const [, MENU_ID] = useMenu();
-  const isSafari: boolean = useUserAgent();
+  const [isSafari] = useUserAgent();
   const preview = useContext(PreviewContext)!;
   const href: string = `${href_ ? href_ : ''}/${fileName}`;
   const fetcher: Fetcher<Thumb, string> = (url) => fetch(url).then((res) => res.json());
