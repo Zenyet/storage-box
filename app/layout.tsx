@@ -21,8 +21,10 @@ export default function RootLayout({ children }: {
         className='w-full h-16 fixed z-20 bottom-0 sm:relative sm:w-1/6 sm:h-screen border-r-[1px] dark:border-black'>
         <Navbar />
       </div>
-      <div className='relative w-full pb-14 sm:pb-0 sm:w-5/6 h-screen z-10 sm:z-50 overflow-y-auto'>
-        {children}
+      <div className='relative w-full pb-14 sm:pb-0 sm:w-5/6 h-screen z-10 sm:z-50'>
+        <div className='h-[100vh] overflow-y-auto'>
+          {children}
+        </div>
         <Breadcrumb />
       </div>
     </div>
