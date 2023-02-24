@@ -21,6 +21,10 @@ type Props = {
 
 
 export default function Page({ params }: Props) { // use catch all routes that params will be string[] fk!
+  if (!params.slug) {
+    return <List />;
+  }
+
   if (params.slug[0] === 'about') {
     return <About />;
   }
