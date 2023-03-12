@@ -1,5 +1,4 @@
 import React from 'react';
-import About from '@/ui/About';
 // import NotFound from '@/ui/not-found';
 // import { getSpecifiedDir } from '@/lib/index';
 // import { ItemType } from '../../types';
@@ -21,13 +20,10 @@ type Props = {
 
 
 export default function Page({ params }: Props) { // use catch all routes that params will be string[] fk!
-  // if (!params.slug) {
-  //   return <List />;
+  // catch all routes will always refetch Server Component... from: https://github.com/vercel/next.js/issues/46939
+  // if (params.slug[0] === 'about') {
+  //   return <About />;
   // }
-
-  if (params.slug[0] === 'about') {
-    return <About />;
-  }
 
   const href_: string = params.slug.join('/');
   const len: number = params.slug.length;

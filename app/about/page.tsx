@@ -2,7 +2,7 @@
 import React from 'react';
 import Background from '@/ui/Background';
 
-export default function About() {
+export default function Page() {
   return (
     <Background>
       <h2 className='text-4xl font-bold py-4'>Hello! 👋</h2>
