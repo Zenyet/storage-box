@@ -102,7 +102,7 @@
 
     .preview-trans {
         transform: translateZ(0);
-        transition: all .5s cubic-bezier(.42, 0, .58, 1);
+        transition: all .3s cubic-bezier(.42, 0, .58, 1);
         /*transition: height .5s ease, width .5s ease, top .5s ease, left .5s ease, opacity;*/
     }
 

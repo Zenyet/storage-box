@@ -64,7 +64,7 @@ export default function Previewer({ show, left, top, filename, url, extension, w
 
   return (
     <div
-      className={'backdrop-blur-md preview-shadow border-[1px] border-gray-300 dark:border-gray-700 flex flex-col w-[128px] h-[128px] preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? (isText ? 'preview-text' : 'preview-show') : '')}
+      className={' preview-shadow border-[1px] border-gray-300 dark:border-gray-700 flex flex-col w-[128px] h-[128px] preview-bg rounded-[10px] overflow-hidden fixed preview-default-pos z-0 opacity-0 preview-trans ' + (show ? (isText ? 'preview-text' : 'preview-show') : '')}
       style={{ left, top, width, height }}
     >
       <header className='h-[5%] flex items-center'>
